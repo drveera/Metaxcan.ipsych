@@ -1,2 +1,4 @@
-# Metaxcan.ipsych
-Metaxcan software and analysis results of various summary statistics inside genome.dk cluster
+
+
+
+> Written with [StackEdit](https://stackedit.io/).
