@@ -37,5 +37,5 @@ while read i
 do
     echo "$wd/pipeline.sh $outdir $gwas $wd/${i}_0.5.db $wd/${i}.txt.gz"
     
-done < $wd/weights.list
+done < $wd/weights.list > metaxcan.adispatch 
 
