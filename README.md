@@ -9,10 +9,10 @@ Just source the `load.sh file`
 
  Inside genome.dk (open)
 ```
-source /project/BartholinGWAS/Veera/Metaxcan.ipsych/load.sh
+source /project/BartholinGWAS/Veera/load.metaxcan.sh
 ```
 
 Inside  iPSYCH (secured)
 ```
-source /project/IGdata/faststorage/userdata/iveera/metaxcan/Metaxcan.ipsych/load.sh
+source /project/IGdata/faststorage/userdata/iveera/metaxcan/load.metaxcan.sh
 ```
