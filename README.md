@@ -21,7 +21,7 @@ source /project/IGdata/faststorage/userdata/iveera/metaxcan/Metaxcan.ipsych/meta
 
 ### Format the summary statistics
 
-The summary stat file should be split in to individual chromosomes. Each file should be named `.sum` extension. For example, chr1.sum, chr2.sum etc. Each file should have a column named `BETA` and a column named `P`
+The summary stat file should be split in to individual chromosomes. Each file should be named `.sum` extension. For example, chr1.sum, chr2.sum etc. Each file should have columns, `SNP`,  `A1`, `A2`, `BETA` and `P`
 
 ```
 SNP CHR POS A1 A2 BETA P
@@ -35,6 +35,7 @@ rs4970383 1 828418 A C 0.214 0.8303
 rs4475691 1 836671 T C -0.604 0.5461
 rs1806509 1 843817 A C -0.262 0.7933
 ```
+Note: `A1` is reference allele, and `A2` is alternate allele or effect allele. 
 
 ### Run Metaxcan
 
