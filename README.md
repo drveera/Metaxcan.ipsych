@@ -27,3 +27,16 @@ You just need to provide 2 parameters:
 
 1. path to gwas summary stats folder
 2. path to output folder
+
+```
+metaxcan --gwas /path/to/gwas/summary/stats/ --outdir /path/to/output/folder
+```
+
+The above command will create a `.adispatch` file in the working directory prefixed with the out name you provided.  Now submit the job to the cluster
+
+For example, if you created a adispatch file named `sample.adispatch`, then
+```
+adispatch --mem=4g sample.adispatch
+```
+
+
