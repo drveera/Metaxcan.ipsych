@@ -35,7 +35,7 @@ wd=`dirname $0`
 
 if [ -d $out ];
 then
-    echo "$out folder already exists. either delete the folder or give a different out name"
+    echo "$out folder already exists. Check if you have already summitted this job. Either delete the folder or give a different out name"
     exit 1
 fi
 
