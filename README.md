@@ -42,10 +42,10 @@ Note: `A1` is reference allele, and `A2` is alternate allele or effect allele.
 You just need to provide 2 parameters: 
 
 1. path to gwas summary stats folder
-2. path to output folder
+2. output name 
 
 ```
-metaxcan --gwas /path/to/gwas/summary/stats/ --outdir /path/to/output/folder
+metaxcan --gwas /path/to/gwas/summary/stats/ --out prefix_for_output_folder
 ```
 
 The above command will create a `.adispatch` file in the working directory prefixed with the out name you provided.  Now submit the job to the cluster
