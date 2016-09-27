@@ -39,11 +39,28 @@ then
     exit 1
 fi
 
+
+
+
 mkdir $out
+
 
 while read i
 do
     echo "$wd/pipeline.sh $out $gwas $wd/${i}_0.5.db $wd/${i}.txt.gz"
     
-done < $wd/weights.list > $out.adispatch 
+done < $wd/weights.list > $out/$out.adispatch
+
+head -1 $out/$out.adispatch > $out/$out.job1.adispatch
+
+sed 1d $out/$out.adispatch > $out/$out.other.jobs.adispatch
+
+job1id=`adispatch --mem=4g $out/$out.job1.adispatch | awk '{print $NF}'`
+
+adispatch --mem=4g --dependency=afterok:$job1id $out/$out.other.jobs.adispatch
+
+echo "Metaxcan jobs submitted successfully. Wait till the jobs are done. You can check the running jobs status with command 'mj'"
+
+
+
 
