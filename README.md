@@ -2,7 +2,7 @@
 
 
 
-## How to source the software?
+## Load the software
 
 
 Just source the `load.sh file`
