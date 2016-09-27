@@ -7,7 +7,7 @@ The software is available in both open and secure clusters of iPSYCH.
 
 ### How to use the software?
 
-Just add an alias in your `~/.bashrc` file. (just copy&paste the following command. ** **do it only once **)
+Just add an alias in your `~/.bashrc` file. (just copy&paste the following command. **do it only once **)
 
  In  genome.dk (open)
 ```
