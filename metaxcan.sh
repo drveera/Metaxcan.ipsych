@@ -35,7 +35,7 @@ wd=`dirname $0`
 
 while read i
 do
-    echo "$wd/pipeline.sh $outdir $gwas ${i}_0.5.db ${i}.txt.gz"
+    echo "$wd/pipeline.sh $outdir $gwas $wd/${i}_0.5.db $wd/${i}.txt.gz"
     
 done < $wd/weights.list
 

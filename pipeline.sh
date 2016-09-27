@@ -5,7 +5,7 @@ outdir=$1
 gwas=$2
 weight=$3
 cov=$4
-metaxcan=$wd/software/MetaXcan/software/MetaXcan.py
+metaxcan=$wd/../MetaXcan/software/MetaXcan.py
 
 $metaxcan \
     --beta_folder $outdir/beta \
