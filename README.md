@@ -14,7 +14,7 @@ source /project/BartholinGWAS/Veera/load.metaxcan.sh
 
 Inside  iPSYCH (secured)
 ```
-source /project/IGdata/faststorage/userdata/iveera/metaxcan/load.metaxcan.sh
+source /project/IGdata/faststorage/userdata/iveera/metaxcan/Metaxcan.ipsych/metaxcan.sh
 ```
 
 ## Usage 
