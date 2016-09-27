@@ -1,16 +1,18 @@
 
 
 
-#### Software 
 
-The software located in `/project/BartholinGWAS/Veera/software/`
+### How to use the software?
 
-Add alias to bashrc, so that the script can be called from anywhere. 
 
+Just source the `load.sh file`
+
+ Inside genome.dk (open)
 ```
-echo "alias metaxcan='/project/BartholinGWAS/Veera/software/MetaXcan/software/MetaXcan.py'" >> ~/.bashrc
-source ~/.bashrc
+source /project/BartholinGWAS/Veera/Metaxcan.ipsych/load.sh
 ```
-####Prediction models
 
-The prediction models and covariances are located in `/project/BartholinGWAS/Veera/pipeline/metaxcan/databases` [ downloaded from http://predictdb.hakyimlab.org/ (on 02-09-2016) ]
+Inside  iPSYCH (secured)
+```
+source /project/IGdata/faststorage/userdata/iveera/metaxcan/Metaxcan.ipsych/load.sh
+```
