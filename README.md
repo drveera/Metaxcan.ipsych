@@ -45,7 +45,7 @@ You just need to provide 2 parameters:
 2. output name 
 
 ```
-metaxcan --gwas /path/to/gwas/summary/stats/ --out prefix_for_output_folder
+metaxcan --gwas /path/to/gwas/summary/stats/ --out preferred output name
 ```
 
 The above command will create a `.adispatch` file in the working directory prefixed with the out name you provided.  Now submit the job to the cluster
