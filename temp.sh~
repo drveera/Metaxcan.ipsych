@@ -1,0 +1,66 @@
+#!/bin/sh
+
+OPTS=`getopt -o h -l predict,extract,assoc,manhattan,help,outdir:,chunkdir:,pheno:,weights:,\
+results:,cov:,expression:,infoscore:,linear:,dosagefolder:,alldbs,dbsdir:,noinfo  -n "predixcan" -- "$@"`
+
+eval set -- "$OPTS"
+helpmessage() {
+    echo "For extraction
+usage: predixcan --extract --outdir <value> --chunkdir <value> 
+For prediction
+usage: predixcan --predict --outdir <value>  --weights <value>  
+note: the outdir should contain a folder 'dosages' with extracted dosage files
+For association
+usage: predixcan --assoc --outdir <value>  --pheno <value> --cov <value>
+note: the outdir should contain a folder 'expression' with predicted expressions 
+For manhattan plots
+usage: predixcan --manhattan --outdir <value> 
+Note: the outdir should contain a folder 'results' with association results. 
+First three can be done at once:
+usage: predixcan --extract --predict --assoc  --outdir <value> --chunkdir <value> --weights <value> --pheno <value>  
+Manhattan plotting should be done seperately since they are not submitted as jobs to cluster
+arguments details:
+logical arguments that takes **no values**:
+--extract 
+--predict 
+--assoc 
+--manhattan 
+--linear
+--noinfo
+arguments that require values:
+--outdir <name of the output folder with full path>
+--chunkdir <full path of the qc1 folder containing the dosage files>
+--dosagefolder <full path of the folder containing extracted dosages>
+--weights <full path of the folder containing the precalculated weights (.db files) >
+--pheno <phenotype file>
+--cov <covariate file> [this is optional, so can be skipped if not required]
+--expression <full path of the folder containing the predicted expressions>
+--results <full path of the folder containing the association results> 
+"
+
+}
+
+while true; do
+    case "$1" in
+	--predict) predict=true; shift ;;
+	--extract) extract=true; shift;;
+	--assoc) assoc=true; shift;;
+	--manhattan) manhattan=true; shift;;
+	--outdir) outdir=$2;  shift 2;;
+	--chunkdir) chunkdir=$2; shift 2;;
+	--pheno) pheno=$2; shift 2;;
+	--pred_exp) pred_exp=$2; shift 2;;
+	--weights) weights=$2; shift 2;;
+	--dosagefolder) dosedir=$2; shift 2;;
+	--expression) expression=$2; shift 2;;
+	--results) results=$2; shift 2;;
+	--cov) cov_file=$2; shift 2 ;;
+	--linear) linear=true; shift ;;
+	--alldbs) alldbs=true; shift ;;
+	--dbsdir) dbsdir=$2; shift 2;;
+	--noinfo) noinfo=true; shift ;;
+	-h | --help) helpmessage; exit 1 ; shift;;
+	--) echo "type -h for help"; shift; break;;
+	*) break ;;
+    esac
+done
