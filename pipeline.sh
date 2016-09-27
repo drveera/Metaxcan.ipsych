@@ -7,7 +7,7 @@ weight=$3
 cov=$4
 metaxcan=$wd/../MetaXcan/software/MetaXcan.py
 
-outname=`dirname $weight`
+outname=`basename $weight`
 $metaxcan \
     --beta_folder $outdir/beta \
     --weight_db_path $weight \
