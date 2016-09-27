@@ -7,14 +7,14 @@ weight=$3
 cov=$4
 metaxcan=$wd/../MetaXcan/software/MetaXcan.py
 
+outname=`dirname $weight`
 $metaxcan \
     --beta_folder $outdir/beta \
     --weight_db_path $weight \
     --covariance $cov \
     --gwas_folder $gwas \
-    --gwas_file_pattern ".*gz" \
-    --compressed \
+    --gwas_file_pattern ".*sum" \
     --beta_column BETA \
     --pvalue_column P \
-    --output_file $outdir/$weight.csv
+    --output_file $outdir/$outname.csv
 
