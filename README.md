@@ -48,13 +48,7 @@ You just need to provide 2 parameters:
 metaxcan --gwas /path/to/gwas/summary/stats/ --out preferred_output_name
 ```
 
-The above command will create a `.adispatch` file in the working directory prefixed with the out name you provided.  Now submit the job to the cluster
-
-For example, if the adispatch file is named `sample.adispatch`, then
-```
-adispatch --mem=4g sample.adispatch
-```
-Once the jobs are finished, you'll see the results `csv` files for 45 tissues inside the output folder.
+The above command will submit the jobs to cluster.  Once the jobs are finished, you'll see the results `csv` files for 45 tissues inside the output folder.
 
 ##Future Update
 
