@@ -38,5 +38,8 @@ For example, if the adispatch file is named `sample.adispatch`, then
 ```
 adispatch --mem=4g sample.adispatch
 ```
+Once the jobs are finished, you'll see the results `csv` files for 45 tissues inside the output folder.
 
+##Future Update
 
+I'll add scripts to create manhattan plots sometime soon. 
