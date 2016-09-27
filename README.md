@@ -21,7 +21,7 @@ source /project/IGdata/faststorage/userdata/iveera/metaxcan/Metaxcan.ipsych/meta
 
 ### Format the summary statistics
 
-The summary stat file should be split in to individual chromosomes. Each file should be named `.sum` extension. For example, chr1.sum, chr2.sum etc. Each file should have columns, `SNP`,  `A1`, `A2`, `BETA` and `P`
+The summary stat file should be split in to individual chromosomes. Each file should be named with `.sum` extension. For example, chr1.sum, chr2.sum etc. Each file should have columns, `SNP`,  `A1`, `A2`, `BETA` and `P`
 
 ```
 SNP CHR POS A1 A2 BETA P
