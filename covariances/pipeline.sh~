@@ -1,0 +1,17 @@
+#!/bin/sh
+
+sd=$(dirname $0)
+
+dose=
+db=
+
+#step1
+$sd/extract.snps.from.dosage.sh $dose
+
+#step2
+$sd/split.dbweights.sh $db
+
+#step3
+dbfolder=$(basename $db)
+$sd/calculate.covariance.sh $dbfolder $dose 
+

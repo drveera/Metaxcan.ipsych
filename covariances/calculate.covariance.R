@@ -1,0 +1,44 @@
+#!/bin/env Rscript
+
+                                        #args1 snp.file
+                                        #args2 dosage file
+                                        #args3 outname
+
+args <- commandArgs(trailingOnly = TRUE)
+
+                                        #libraries
+library(data.table)
+library(reshape2)
+library(parallel)
+
+cat("Reading snp file","\n")
+snp <- read.table(args[1])
+names(snp) <- c("rsid","gene")
+
+cat("Reading dose file")
+dose <- fread(paste0("zcat ",args[2]))
+
+snp.split <- split(snp,snp$gene)
+
+cal.cov <- function(dfm){
+    dose.sub <- dose[V2 %in% dfm$rsid]
+    dose.sub.matrix <- t(dose.sub[,7:ncol(dose.sub),with=FALSE])
+    colnames(dose.sub.matrix) <- dose.sub$V2
+    dose.cov.matrix <- cov(dose.sub.matrix)
+    dose.cov.melted <- melt(dose.cov.matrix)
+    names(dose.cov.melted) <- c("RSID1","RSID2","VALUE")
+    GENE <- rep(dfm[1,2],nrow(dose.cov.melted))
+    return(cbind(GENE,dose.cov.melted))
+}
+
+
+
+dose <- mclapply(snp.split,cal.cov,mc.cores = 4)
+dose <- do.call(rbind,dose)
+
+write.table(dose,args[3],row.names = FALSE, col.names = FALSE, quote = FALSE)
+
+
+
+
+

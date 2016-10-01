@@ -1,15 +1,30 @@
 #!/bin/sh
 
-dosage=$1
-outdir=$2
+if [ -z $1 ];
+then
+    echo "usage: ./script dosage folder"
+    exit 1
+fi
 
-ls $dosage/*gz >$outdir/dosage.list
+dosage=$1
+
+if [ -d dosage.map ];
+then
+    echo "folder dosage.map already exists"
+    exit 1
+fi
+
+mkdir dosage.map
+
+ls $dosage/*gz > dosage.map/dosage.list
 
 while read dosage
 do
     echo "Extracting snp information from $dosage"
     out=$(basename $dosage)
-    zcat $dosage | cut -f 1,2 -d " " > $outdir/$out.snps
-done < $outdir/dosage.list
+    zcat $dosage | cut -f 1,2 -d " " > dosage.map/$out.snps
+done < dosage.map/dosage.list
+
+cat dosage.map/*snps > dosage.map/all.snps.txt
 
 

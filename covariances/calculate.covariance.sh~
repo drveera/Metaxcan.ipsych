@@ -1,0 +1,10 @@
+#!/bin/sh
+
+sd=$(dirname $0)
+
+for i in `seq 22`
+do
+    Rscript 
+done
+
+
