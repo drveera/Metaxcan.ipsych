@@ -1,0 +1,14 @@
+#!/bin/sh
+
+dosage=$1
+
+
+ls $dosage/*gz > dosage.list
+
+while read dosage
+do
+    out=$(basename $dosage)
+    zcat $dosage | cut -f 1,2 -d " " > $out.snps
+done < dosage.list
+
+

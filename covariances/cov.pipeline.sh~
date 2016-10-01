@@ -1,0 +1,7 @@
+#!/bin/sh
+
+sd=`dirname $0`
+
+#step1 extract weights from the db file
+
+sh $
