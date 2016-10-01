@@ -20,4 +20,16 @@ dfm$CHR <- as.numeric(as.vector(dfm$CHR))
 
 library(qqman)
 
-manhattan(dfm)
+manhattan(dfm, cex = 0.5, cex.axis = 0.8, col = c("grey", "blue"), ylim = c(0,12))
+
+bonferroni <- res$pvalue*nrow(res)
+
+dfm.sig <- res [ bonferroni < 0.5, ]
+
+dfm.sig$logp <- -log(dfm.sig$pvalue)
+
+text(labels = as.character(dfm.sig$gene_name), x = as.numeric(dfm.sig$logp), )
+
+oddchr <- seq(1,22,2)
+
+dfm1$oddgrp <- dfm1$CHR %in% oddchr
