@@ -16,7 +16,7 @@ snp <- read.table(args[1])
 names(snp) <- c("rsid","gene")
 
 cat("Reading dose file")
-dose <- fread(paste0("zcat ",args[2]))
+dose <- fread(paste0("zcat ",args[2]), drop = c(1007:78056))
 
 snp.split <- split(snp,snp$gene)
 
