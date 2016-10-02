@@ -7,6 +7,8 @@ weight=$3
 cov=$4
 metaxcan=$wd/../MetaXcan/software/MetaXcan.py
 
+sd=$(dirname $0)
+
 outname=`basename $weight`
 $metaxcan \
     --beta_folder $outdir/beta \
@@ -18,3 +20,4 @@ $metaxcan \
     --pvalue_column P \
     --output_file $outdir/$outname.csv
 
+$sd/manhattan.R $outdir/$outname.csv
