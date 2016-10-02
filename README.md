@@ -48,7 +48,9 @@ You just need to provide 2 parameters:
 metaxcan --gwas /path/to/gwas/summary/stats/ --out preferred_output_name
 ```
 
-The above command will submit the jobs to cluster.  Once the jobs are finished, you'll see the results `csv` files for 45 tissues inside the output folder.
+The above command will submit the jobs to cluster.  Once the jobs are finished, you'll see the results `csv` files for 45 tissues inside the output folder. 
+
+**Note**: If you don't want to submit as job and run straight in the front end,  add `--nojob` option. 
 
 ##Manhattan plots
 
