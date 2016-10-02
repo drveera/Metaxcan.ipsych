@@ -16,7 +16,7 @@ sd=$(dirname $0)
 for i in `seq 22`;
 do
     Rscript $sd/calculate.covariance.R \
-	    $dbwtdir/chr$i.snps \
+	    $dbwtdir/$i.snps \
 	    $dosedir/*chr$i.*gz \
 	    $dbwtdir/covariances/$i.covariance
 done

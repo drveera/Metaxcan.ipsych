@@ -22,7 +22,7 @@ while read dosage
 do
     echo "Extracting snp information from $dosage"
     out=$(basename $dosage)
-    zcat $dosage | cut -f 1,2 -d " " > dosage.map/$out.snps
+    zcat $dosage | cut -f 1,2  > dosage.map/$out.snps
 done < dosage.map/dosage.list
 
 cat dosage.map/*snps > dosage.map/all.snps.txt
