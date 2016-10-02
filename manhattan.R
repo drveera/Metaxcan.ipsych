@@ -43,11 +43,11 @@ ggplot(gwas,aes(
             ))+
     geom_point(shape = 18)+
     scale_size(range= c(0,3))+
-    geom_label(nudge_x = 500, colour = "black", size = 2.5) +
+    geom_label(nudge_y = 0.15, colour = "black", size = 2.5) +
     scale_x_continuous(breaks = xbreaks, labels = names(xbreaks)) +
     geom_hline(aes(yintercept = sigline), colour = "red") +
     theme(legend.position="none", panel.grid.minor = element_blank()) +
-    labs(x = "chromosome", title = "Manhattan")
+    labs(x = "chromosome", title = basename(args[1]))
 
   
 ggsave(paste0(args[1],".man.pdf"))

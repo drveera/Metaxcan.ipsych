@@ -1,18 +1,19 @@
 #!/bin/sh
 
-OPTS=`getopt -o h -l out:,gwas: -n 'metaxcan' -- "$@"`
+OPTS=`getopt -o h -l out:,gwas:,nojob -n 'metaxcan' -- "$@"`
 
 eval set -- "$OPTS"
 
 
 helpmessage() {
     echo "Usage:
-metaxcan --gwas /path/to/gwas/summary/files --outdir /path/to/output/folder"
+metaxcan --gwas /path/to/gwas/summary/files --out outputname"
 }
 while true; do
     case "$1" in
 	--out) out=$2; shift 2 ;;
 	--gwas) gwas=$2; shift 2 ;;
+	--nojob) nojob=true; shift ;; 
 	-h | --help) helpmessage; exit 1; shift ;;
 	--) shift; break ;;
 	*) exit 1 ;;
@@ -44,7 +45,15 @@ fi
 
 mkdir $out
 
-
+if [ ! -z $nojob ];
+then
+    while read i
+    do
+	$wd/pipeline.sh $out $gwas $wd/${i}_0.5.db $wd/${i}.txt.gz
+    done < $wd/weights.list
+    
+else
+    
 while read i
 do
     echo "$wd/pipeline.sh $out $gwas $wd/${i}_0.5.db $wd/${i}.txt.gz"
@@ -61,6 +70,7 @@ adispatch --mem=4g --dependency=afterok:$job1id $out/$out.other.jobs.adispatch
 
 echo "Metaxcan jobs submitted successfully. Wait till the jobs are done. You can check the running jobs status with command 'mj'"
 
+fi
 
 
 
