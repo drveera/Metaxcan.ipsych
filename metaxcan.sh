@@ -56,7 +56,7 @@ if [ ! -z $nojob ];
 then
     while read i
     do
-	echo "$wd/pipeline.sh $out $gwas $wd/${i}_0.5.db $wd/${i}.txt.gz.${pop}"
+	echo "$wd/pipeline.sh $out $gwas $wd/${i}_0.5.db $wd/${i}.txt.gz${pop}"
     done < $wd/weights.list${pop}
     
 else
