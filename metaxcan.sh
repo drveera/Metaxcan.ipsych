@@ -49,7 +49,7 @@ mkdir $out
 
 if [ ! -z $pop ];
 then
-    "population $pop chosen"
+    echo "population $pop chosen"
 fi
 
 if [ ! -z $nojob ];
