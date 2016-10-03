@@ -1,0 +1,24 @@
+#!/bin/sh
+
+sum=$1
+
+if [ -z $1 ];
+then
+    echo "usage: ./script summary.file"
+    exit 1
+fi
+
+
+sumname=$(basename $sum)
+
+if [ -d $sumname ];
+then
+    echo "folder $sumname already exists! in the current directory
+exiting!"
+    exit 1
+fi
+
+Rscript $sd/format.summary.R $sum $sumname
+    
+    
+   

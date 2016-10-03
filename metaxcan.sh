@@ -7,7 +7,7 @@ eval set -- "$OPTS"
 
 helpmessage() {
     echo "Usage:
-metaxcan --gwas /path/to/gwas/summary/files --out outputname"
+metaxcan --gwas <summary stat file> --out outputname"
 }
 while true; do
     case "$1" in
@@ -43,7 +43,9 @@ then
 fi
 
 
+sh $wd/format.summary.sh $gwas
 
+gwasbase=$(basename $gwas)
 
 mkdir $out
 
@@ -56,14 +58,14 @@ if [ ! -z $nojob ];
 then
     while read i
     do
-	$wd/pipeline.sh $out $gwas $wd/${i}_0.5.db $wd/${i}.txt.gz${pop}
+	$wd/pipeline.sh $out $gwasbase.chfiles $wd/${i}_0.5.db $wd/${i}.txt.gz${pop}
     done < $wd/weights.list${pop}
     
 else
     
 while read i
 do
-    echo "$wd/pipeline.sh $out $gwas $wd/${i}_0.5.db $wd/${i}.txt.gz${pop}"
+    echo "$wd/pipeline.sh $out $gwasbase.chfiles $wd/${i}_0.5.db $wd/${i}.txt.gz${pop}"
     
 done < $wd/weights.list${pop} > $out/$out.adispatch
 
