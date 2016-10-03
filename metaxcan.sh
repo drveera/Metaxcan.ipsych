@@ -13,7 +13,7 @@ while true; do
     case "$1" in
 	--out) out=$2; shift 2 ;;
 	--gwas) gwas=$2; shift 2 ;;
-	--pop) pop=$2; shift ;;
+	--pop) pop=$2; shift 2 ;;
 	--nojob) nojob=true; shift ;; 
 	-h | --help) helpmessage; exit 1; shift ;;
 	--) shift; break ;;
@@ -27,7 +27,8 @@ done
 
 if [ -z $out ] || [ -z $gwas ];
 then
-    echo "type -h for usage"
+    echo "One or more arguments missing
+type -h for usage"
     exit 1
 fi
 
@@ -46,6 +47,11 @@ fi
 
 mkdir $out
 
+if [ ! -z $pop ];
+then
+    "population $pop chosen"
+fi
+
 if [ ! -z $nojob ];
 then
     while read i
@@ -57,9 +63,9 @@ else
     
 while read i
 do
-    echo "$wd/pipeline.sh $out $gwas $wd/${i}_0.5.db $wd/${i}.txt.gz"
+    echo "$wd/pipeline.sh $out $gwas $wd/${i}_0.5.db $wd/${i}.txt.gz${pop}"
     
-done < $wd/weights.list > $out/$out.adispatch
+done < $wd/weights.list${pop} > $out/$out.adispatch
 
 head -1 $out/$out.adispatch > $out/$out.job1.adispatch
 
