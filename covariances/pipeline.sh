@@ -2,7 +2,7 @@
 
 if [ -z $2 ];
 then
-    echo "Usage: ./script dosage/folder db/file"
+    echo "Usage: ./script dosage/folder db/folder"
     exit 1
 fi
 
@@ -10,7 +10,12 @@ fi
 sd=$(dirname $0)
 
 dose=$1
-db=$2
+dbfolderlist=$2
+
+while read i
+do
+basename $i
+done < $dbfolderlist > dbfolder.list
 
 #step1
 if [ -d dosage.map ];
@@ -21,9 +26,12 @@ fi
 $sd/extract.snps.from.dosages.sh $dose
 
 #step2
-$sd/split.dbweights.sh $db
+while read i
+do
+    $sd/split.dbweights.sh $i
+done < $dbfolderlist
+
 
 #step3
-dbfolder=$(basename $db)
-$sd/calculate.covariance.sh $dbfolder $dose 
+$sd/calculate.covariance.sh $dose 
 

@@ -11,14 +11,23 @@ library(data.table)
 library(reshape2)
 library(parallel)
 
-cat("Reading snp file","\n")
-snp <- read.table(args[1])
-names(snp) <- c("rsid","gene")
+cat("Reading snp files","\n")
+dbfolders <- readLines("dbfolder.list")
+                                        #snp <- read.table(args[1])
+
+                                        #names(snp) <- c("rsid","gene")
+dblist <- list()
+for (i in 1:length(dbfolders)){
+    dfm <- read.table(paste0(dbfolders[i],"/",args[1]))
+    names(dfm) <- c("rsid","gene")
+    dblist[[i]] <- dfm
+}
+
 
 cat("Reading dose file")
 dose <- fread(paste0("zcat ",args[2]))
 
-snp.split <- split(snp,snp$gene)
+
 
 cal.cov <- function(dfm){
     dose.sub <- dose[V2 %in% dfm$rsid]
@@ -32,11 +41,14 @@ cal.cov <- function(dfm){
 }
 
 
+for (i in 1:length(dblist)){
+snp.split <- split(dblist[[i]],dblist[[i]]$gene)
+                                        #dose <- mclapply(snp.split,cal.cov,mc.cores = 4)
+doselst <- lapply(snp.split, cal.cov)
+doselst <- do.call(rbind,doselst)
+write.table(doselst,paste0(dbfolders[i],"/",args[3]),row.names = FALSE, col.names = FALSE, quote = FALSE)    
+}
 
-dose <- mclapply(snp.split,cal.cov,mc.cores = 4)
-dose <- do.call(rbind,dose)
-
-write.table(dose,args[3],row.names = FALSE, col.names = FALSE, quote = FALSE)
 
 
 

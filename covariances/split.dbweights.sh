@@ -18,6 +18,7 @@ then
     exit 1
 fi
 mkdir $dbname
+mkdir $dbname/covariances
 
 #step1 extract weights from the db file
 echo "extracting weights from $1"

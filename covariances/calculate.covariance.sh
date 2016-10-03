@@ -6,31 +6,31 @@ then
     exit 1
 fi
 
-dbwtdir=$1
-dosedir=$2
 
+dosedir=$1
 
-mkdir $dbwtdir/covariances
 
 sd=$(dirname $0)
 
 for i in `seq 22`;
 do
-    Rscript $sd/calculate.covariance.R \
-	    $dbwtdir/$i.snps \
+	Rscript $sd/calculate.covariance.R \
+	    $i.snps \
 	    $dosedir/*chr$i.*gz \
-	    $dbwtdir/covariances/$i.covariance
+	    covariances/$i.covariance
 done
 
-dbname=$(basename $dbwtdir)
+while read i;
+do
+    dbname=$(basename $i)
+    cat $i/covariances/*covariance > $dbname.covariance2
+    echo "GENE RSID1 RSID2 VALUE" > $dbname.head
+    cat $dbname.head $dbname.covariance2 > $dbname.covariance
+    gzip $dbname.covariance
+    rm $dbname.head
+    rm $dbname.covariance2
+    rm -r $i
+done < dbfolder.list
 
-cat $dbwtdir/covariances/*covariance > $dbname.covariance2
-
-echo "GENE RSID1 RSID2 VALUE" > $dbname.head
 
 
-cat $dbname.head $dbname.covariance2 > $dbname.covariance
-gzip $dbname.covariance
-rm $dbname.head
-rm $dbname.covariance2
-rm -r $dbwtdir
