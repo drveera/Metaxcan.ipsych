@@ -1,6 +1,6 @@
 #!/bin/sh
 
-OPTS=`getopt -o h -l out:,gwas:,nojob,pop: -n 'metaxcan' -- "$@"`
+OPTS=`getopt -o h -l out:,gwas:,nojob,pop:,test,cov:,db: -n 'metaxcan' -- "$@"`
 
 eval set -- "$OPTS"
 
@@ -14,7 +14,10 @@ while true; do
 	--out) out=$2; shift 2 ;;
 	--gwas) gwas=$2; shift 2 ;;
 	--pop) pop=$2; shift 2 ;;
-	--nojob) nojob=true; shift ;; 
+	--nojob) nojob=true; shift ;;
+	--test) test=true; shift ;;
+	--cov) cov=$2; shift 2 ;;
+	--db) db=$2; shift 2 ;;
 	-h | --help) helpmessage; exit 1; shift ;;
 	--) shift; break ;;
 	*) exit 1 ;;
@@ -53,6 +56,19 @@ if [ ! -z $pop ];
 then
     echo "population $pop chosen"
 fi
+
+if [ ! -z $test ];
+then    
+   if [ -z $db ] || [ -z $cov ];
+   then
+       echo "provide cov and db files"
+       exit 1
+   fi
+   $wd/pipeline.sh $out $gwasbase.chfiles $db $cov
+   exit 1
+fi
+
+
 
 if [ ! -z $nojob ];
 then

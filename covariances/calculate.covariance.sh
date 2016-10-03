@@ -9,6 +9,7 @@ fi
 dbwtdir=$1
 dosedir=$2
 
+
 mkdir $dbwtdir/covariances
 
 sd=$(dirname $0)
