@@ -7,7 +7,8 @@ library(ggplot2)
                                         #load the data
 gwas <- read.csv(args[1])
 
-ensembl <- read.table("/home/veera/BartholinGWAS/Veera/metaxcan/ensembl.gene.id.position")
+#ensembl <- read.table("/home/veera/BartholinGWAS/Veera/metaxcan/ensembl.gene.id.position")
+ensembl <- read.table(args[2])
 
 names(ensembl) <- c("chrom","bp","gene")
 

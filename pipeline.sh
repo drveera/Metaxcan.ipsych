@@ -20,4 +20,4 @@ $metaxcan \
     --pvalue_column P \
     --output_file $outdir/$outname.csv
 
-$sd/manhattan.R $outdir/$outname.csv
+$sd/manhattan.R $outdir/$outname.csv $sd/ensembl.gene.id.position
