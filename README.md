@@ -19,9 +19,9 @@ source /project/IGdata/faststorage/userdata/iveera/metaxcan/load.metaxcan.sh
 
 ## Usage 
 
-### Format the summary statistics
+### Format the summary statistics file
 
-The summary stat file should be split in to individual chromosomes. Each file should be named with `.sum` extension. For example, chr1.sum, chr2.sum etc. Each file should have columns, `SNP`,  `A1`, `A2`, `BETA` and `P`
+ The summary stat file should be a single file (either comma or tab separated) and have columns named `SNP`,  `A1`, `A2`, `BETA` and `P`.  
 
 ```
 SNP CHR POS A1 A2 BETA P
@@ -45,7 +45,7 @@ You just need to provide 2 parameters:
 2. output name 
 
 ```
-metaxcan --gwas /path/to/gwas/summary/stats/ --out preferred_output_name
+metaxcan --gwas summary/stats/file --out preferred_output_name
 ```
 
 The above command will submit the jobs to cluster.  Once the jobs are finished, you'll see the results `csv` files for 45 tissues inside the output folder. 
