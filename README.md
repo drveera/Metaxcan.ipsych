@@ -43,7 +43,7 @@ Note: `A1` is reference allele, and `A2` is alternate allele or effect allele.
 
 You just need to provide 2 parameters: 
 
-1. path to gwas summary stats folder
+1. gwas summary file (with absolute path)
 2. output name 
 
 ```
@@ -52,7 +52,7 @@ metaxcan --gwas summary/stats/file --out preferred_output_name
 
 The above command will submit the jobs to cluster.  Once the jobs are finished, you'll see the results `csv` files for 45 tissues inside the output folder. 
 
-**Note**: If you don't want to submit as job and run straight in the front end,  add `--nojob` option. 
+**Note**: If you don't want to submit as job and like to execute in the front end,  add `--nojob` option. 
 
 ##Manhattan plots
 
