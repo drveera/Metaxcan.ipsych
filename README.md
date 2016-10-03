@@ -22,6 +22,8 @@ source /project/IGdata/faststorage/userdata/iveera/metaxcan/load.metaxcan.sh
 ### Format the summary statistics file
 
  The summary stat file should be a single file (either comma or tab separated) and have columns named `SNP`,  `A1`, `A2`, `BETA` and `P`.  
+ 
+**Note**: Even if you have odds ratio, name it as BETA
 
 ```
 SNP CHR POS A1 A2 BETA P
