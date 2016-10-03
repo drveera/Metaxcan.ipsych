@@ -1,6 +1,6 @@
 #!/bin/sh
 
-OPTS=`getopt -o h -l out:,gwas:,nojob -n 'metaxcan' -- "$@"`
+OPTS=`getopt -o h -l out:,gwas:,nojob,pop: -n 'metaxcan' -- "$@"`
 
 eval set -- "$OPTS"
 
@@ -13,6 +13,7 @@ while true; do
     case "$1" in
 	--out) out=$2; shift 2 ;;
 	--gwas) gwas=$2; shift 2 ;;
+	--pop) pop=$2; shift ;;
 	--nojob) nojob=true; shift ;; 
 	-h | --help) helpmessage; exit 1; shift ;;
 	--) shift; break ;;
@@ -49,8 +50,8 @@ if [ ! -z $nojob ];
 then
     while read i
     do
-	$wd/pipeline.sh $out $gwas $wd/${i}_0.5.db $wd/${i}.txt.gz
-    done < $wd/weights.list
+	$wd/pipeline.sh $out $gwas $wd/${i}_0.5.db $wd/${i}.txt.gz.${pop}
+    done < $wd/weights.list${pop}
     
 else
     
