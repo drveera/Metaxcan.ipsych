@@ -64,6 +64,8 @@ It is possible to generate Manhattan plots with user defined threshold.
 
 `metaxcan --man --csv <csv.file> --labelthreshold <number>`
 
+where, arguments `--csv` requires csv output file from metaxcan and `--labelthreshold` requires number of your preference (see the plot y axis and choose this number). 
+
 For example,  Below is a plot showing gene associations of schizophrenia based on whole blood gene expression. Here you can see that the genes above the red line are labelled. You can change this (scroll down). 
 ![Manhattan plot](https://github.com/veera-dr/Metaxcan.ipsych/blob/master/support/DGN-WB_0.5.db.csv.man.png)
 
