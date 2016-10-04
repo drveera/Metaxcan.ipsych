@@ -1,6 +1,6 @@
 #!/bin/sh
 
-OPTS=`getopt -o h -l out:,gwas:,nojob,pop:,test,cov:,db: -n 'metaxcan' -- "$@"`
+OPTS=`getopt -o h -l out:,gwas:,nojob,pop:,test,cov:,db:,man,csv:,labelthreshold: -n 'metaxcan' -- "$@"`
 
 eval set -- "$OPTS"
 
@@ -18,6 +18,9 @@ while true; do
 	--test) test=true; shift ;;
 	--cov) cov=$2; shift 2 ;;
 	--db) db=$2; shift 2 ;;
+	--man) man=true; shift ;;
+	--csv) csv=$2; shift 2;;
+	--labelthreshold) labelthreshold=$2; shift 2;;
 	-h | --help) helpmessage; exit 1; shift ;;
 	--) shift; break ;;
 	*) exit 1 ;;
@@ -26,9 +29,34 @@ while true; do
 done
 
 
+wd=`dirname $0`
+
+#########################################
+
+#JUST MANHATTAN PLOT 
+#######################################
+
+if [ ! -z $man ];
+then    
+   if [ -z $csv ];
+   then
+       echo "Usage: metaxcan --man <csv.file> <label.threshold.(optional)>"
+       exit 1
+   else
+       echo "Plotting $csv"
+       Rscript $wd/manhattan.R $csv $wd/ensembl.gene.id.position $labelthreshold
+       exit 1
+   fi
+   
+fi
+
+############################################
+
+#METAXCAN
+#############################################
 
 
-if [ -z $out ] || [ -z $gwas ];
+if [ -z $out ] || [ -z $gwas ] ;
 then
     echo "One or more arguments missing
 type -h for usage"
@@ -37,7 +65,7 @@ fi
 
    
 
-wd=`dirname $0`
+
 
 if [ -d $out ];
 then

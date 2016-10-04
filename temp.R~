@@ -1,0 +1,19 @@
+
+args <- commandArgs(trailingOnly = TRUE)
+
+
+a <- args[1]
+b <- args[2]
+c <- args[3]
+
+print(a)
+
+print(exists("a"))
+
+print(b)
+
+print(exists("b"))
+
+print(c)
+
+print(exists("c"))
