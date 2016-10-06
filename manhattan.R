@@ -29,15 +29,17 @@ gwas$chrom <- factor(gwas$chrom, levels = 1:22)
 gwas <- gwas[order(gwas$chrom, gwas$bp),]
 gwas$index <- 1:nrow(gwas)
 
+sigline <- -log10(0.05/nrow(gwas))
+
 labelthreshold <- args[3]
 if (is.na(labelthreshold)){
-    sigline <- -log10(0.05/nrow(gwas))
+    labelline <- -log10(0.05/nrow(gwas))
 } else {
-    sigline <- as.numeric(labelthreshold)
+    labelline <- as.numeric(labelthreshold)
 }
 
 gwas$label <- gwas$gene_name
-gwas$label <- replace(gwas$label, -log10(gwas$pvalue) < sigline, NA)
+gwas$label <- replace(gwas$label, -log10(gwas$pvalue) < labelline, NA)
 
 gwas.split <- split(gwas,gwas$chrom)
 xbreaks <- sapply(gwas.split,function(x) x$index[round(nrow(x)/2)])
