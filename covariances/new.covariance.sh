@@ -23,7 +23,7 @@ outname=$(basename snplist)
 #softwares
 source /com/extra/plink/1.90-beta-2016-03/load.sh
 
-make -f $sd/Makefile  plinkfile=$plinkfile snplist=$snplist snplist_c1=$snplist.c1 outname=$outname
+make -f $sd/Makefile  plinkfile=$plinkfile snplist=$snplist snplist_c1=$snplist.c1 outname=$outname sd=$sd
 
 
 
