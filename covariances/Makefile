@@ -3,14 +3,19 @@
 
 #write snps/allele list
 
+# check if the alleles match between bim and list files
+rsids.mismatch:$(plinkfile).bim $(snplist)
+	Rscript $(plinkfile).bim $(snplist)
 
-#extract the snps with force-reference-allele option
+#extract the snps forcing the reference-allele to 
 $(outname).bed:$(plinkfile).bed
 	plink --bfile $(plinkfile) \
 --extract $(snplist_c1) \
 --reference-allele $(snplist) \
 --make-bed \
 --out $(outname)
+
+
 
 
 # create a table of number of snps queried and number of snps extracted
