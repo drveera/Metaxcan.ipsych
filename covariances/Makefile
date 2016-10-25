@@ -4,8 +4,8 @@
 #write snps/allele list
 
 # check if the alleles match between bim and list files
-rsids.mismatch:$(plinkfile).bim $(snplist)
-	Rscript $(sd)/allele.check.R $(plinkfile).bim $(snplist)
+rsids.mismatch:$(outname).bim $(snplist)
+	Rscript $(sd)/allele.check.R $(outname).bim $(snplist)
 
 #extract the snps forcing the reference-allele to 
 $(outname).bed:$(plinkfile).bed
