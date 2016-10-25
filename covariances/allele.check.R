@@ -12,6 +12,8 @@ snp <- read.table(args[2])
                                         #2nd column is a1 allele
 names(snp) <- c("rsid","a1")
 
+print("read both files")
+
 dfm <- merge(bim,snp,by="rsid")
 
 dfm.sub <- dfm[! dfm$A1 == dfm$a1,]
