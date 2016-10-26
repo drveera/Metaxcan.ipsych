@@ -5,6 +5,8 @@
 # create a table of number of snps queried and number of snps extracted
 # create a list of snps not extracted along with its transcript IDs
 
+$(outname).snps.not.extracted:$(outname).weights.csv $(outname).mismatch.removed.bim
+	Rscript $(sd)/write.snp.report.R $(outname).weights.csv $(outname).mismatch.removed.bim $(outname).snps.not.extracted
 
 
 #check the allele match again
