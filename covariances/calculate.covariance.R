@@ -44,7 +44,7 @@ snp.split <- split(dblist[[i]],dblist[[i]]$gene)
                                         #dose <- mclapply(snp.split,cal.cov,mc.cores = 4)
 doselst <- lapply(snp.split, cal.cov)
 doselst <- do.call(rbind,doselst)
-write.table(doselst,paste0(dbfolders[i],"/",args[3]),row.names = FALSE, col.names = FALSE, quote = FALSE)    
+write.table(doselst,paste0(dblist.files[i],"covariance.matrix"),row.names = FALSE, col.names = FALSE, quote = FALSE)    
 }
 
 
