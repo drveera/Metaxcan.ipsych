@@ -35,6 +35,8 @@ cal.cov <- function(dfm){
     dose.cov.melted <- melt(dose.cov.matrix)
     names(dose.cov.melted) <- c("RSID1","RSID2","VALUE")
     GENE <- rep(dfm$gene[1],nrow(dose.cov.melted))
+    print("done!")
+    print(GENE[1])
     return(cbind(GENE,dose.cov.melted))
 }
 
