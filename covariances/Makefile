@@ -10,7 +10,7 @@ $(outname).first5columns:$(outname).gen.traw
 	awk '{print "chr" $$1 "\t" $$2 "\t" $$4 "\t" $$6 "\t" $$5}' $(outname).gen.traw > $(outname).first5columns 
 # maf column
 $(outname).maf:$(outname).frq
-	awk '{print $5}' $(outname).frq | sed 1d > $(outname).maf 
+	awk '{print $$5}' $(outname).frq | sed 1d > $(outname).maf 
 
 # calculate allele frequencies
 $(outname).frq:$(outname).gen.traw $(outname).mismatch.removed.bim
