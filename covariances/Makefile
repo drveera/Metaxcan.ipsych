@@ -7,7 +7,7 @@ $(outname).dosage.gz:$(outname).first5columns $(outname).maf $(outname).gen.traw
 	paste $(outname).first5columns $(outname).maf $(cut -f 7- $(outname).gen.traw) | gzip > $(outname).dosage.gz
 # first 5 columns
 $(outname).first5columns:$(outname).gen.traw
-	awk '{print "chr" $1 "\t" $2 "\t" $4 "\t" $6 "\t" $5}' $(outname).gen.traw > $(outname).first5columns 
+	awk '{print "chr" $$1 "\t" $$2 "\t" $$4 "\t" $$6 "\t" $$5}' $(outname).gen.traw > $(outname).first5columns 
 # maf column
 $(outname).maf:$(outname).frq
 	awk '{print $5}' $(outname).frq | sed 1d > $(outname).maf 
