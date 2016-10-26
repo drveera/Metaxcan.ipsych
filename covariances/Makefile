@@ -1,5 +1,12 @@
 #!/bin/make
 
+# write oxford format
+
+$(outname).gen:$(outname).mismatch.removed.bim
+	plink --bfile $(outname).mismatch.removed \
+--recode oxford \
+--out $(outname).gen
+
 
 #write snps/allele list
 # create a table of number of snps queried and number of snps extracted
