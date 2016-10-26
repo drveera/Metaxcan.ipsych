@@ -1,5 +1,12 @@
 #!/bin/make
 
+#calculate the covariance
+$(outname).weights.csv.covariance.matrix:$(outname).dosage.gz
+	Rscript $(sd)/calculate.covariance.R $(outname).weights.csv $(outname).dosage.gz
+	gzip $(outname).weights.csv.covariance.matrix 
+
+$(outname).dosage.gz:$(outname).dosage 
+	gzip $(outname).dosage 
 
 # format in to predixcan
 #predixcan file
