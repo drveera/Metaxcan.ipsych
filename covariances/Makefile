@@ -3,6 +3,11 @@
 
 #write snps/allele list
 
+
+#check the allele match again
+rsids.mismatch.verify: $(outname).mismatch.removed.bim $(snplist)
+	Rscript $(sd)/allele.check.R $(outname).mismatch.removed.bim $(snplist)
+
 #remove the allele mismatched snps from the plink file
 
 $(outname).mismatch.removed.bed:rsids.mismatch  $(outname).bed
