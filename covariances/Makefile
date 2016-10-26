@@ -9,7 +9,7 @@ $(outname).maf:$(outname).gen $(outname).mismatch.removed.bim
 
 $(outname).gen:$(outname).mismatch.removed.bim $(outname).snps.not.extracted $(outname).rsids.mismatch.verify
 	plink --bfile $(outname).mismatch.removed \
---recode oxford \
+--recode A tab \
 --out $(outname).gen
 
 
