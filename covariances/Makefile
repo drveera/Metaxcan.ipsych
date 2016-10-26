@@ -3,6 +3,15 @@
 
 #write snps/allele list
 
+#remove the allele mismatched snps from the plink file
+
+$(outname).mismatch.removed.bed:rsids.mismatch  $(outname).bed
+	plink --bfile $(outname) \
+--exclude rsids.mismatch \
+--make-bed \
+--out $(outname).mismatch.removed
+
+
 # check if the alleles match between bim and list files
 rsids.mismatch:$(outname).bim $(snplist)
 	Rscript $(sd)/allele.check.R $(outname).bim $(snplist)
