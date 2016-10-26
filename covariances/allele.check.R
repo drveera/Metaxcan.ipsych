@@ -8,15 +8,15 @@ args <- commandArgs(trailingOnly = TRUE)
 bim <- read.table(args[1])
                                         #4th column is a1 allele
 names(bim) <- c("chrom","rsid","v3","pos","A1","A2")
-class(bim$A2) <- "character"
-class(bim$A1) <- "character"
+bim$A2 <- as.character(bim$A2)
+bim$A1 <- as.character(bim$A1)
 
 
 snp <- read.csv(args[2], header = TRUE)
 
                                         #2nd column is a1 allele
-class(snp$ref_allele) <- "character"
-class(snp$eff_allele) <- "character"
+snp$ref_allele <- as.character(snp$ref_allele)
+snp$eff_allele <- as.character(snp$eff_allele)
 
 
 
