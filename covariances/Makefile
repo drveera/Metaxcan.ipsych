@@ -12,7 +12,7 @@ $(outname).rsids.mismatch.verify: $(outname).mismatch.removed.bim $(snplist) $(o
 
 $(outname).mismatch.removed.bim:$(outname).rsids.mismatch  $(outname).bim
 	plink --bfile $(outname) \
---exclude rsids.mismatch \
+--exclude $(outname).rsids.mismatch \
 --reference-allele $(snplist) \
 --make-bed \
 --out $(outname).mismatch.removed
