@@ -10,7 +10,7 @@ $(outname).rsids.mismatch.verify: $(outname).mismatch.removed.bim $(snplist) $(o
 
 #remove the allele mismatched snps from the plink file
 
-$(outname).mismatch.removed.bed:rsids.mismatch  $(outname).bed
+$(outname).mismatch.removed.bim:rsids.mismatch  $(outname).bim
 	plink --bfile $(outname) \
 --exclude rsids.mismatch \
 --reference-allele $(snplist) \
@@ -23,7 +23,7 @@ $(outname).rsids.mismatch:$(outname).bim $(snplist)
 	Rscript $(sd)/allele.check.R $(outname).bim $(snplist) $(outname).rsids.mismatch
 
 #extract the snps forcing the reference-allele to 
-$(outname).bed:$(plinkfile).bed
+$(outname).bed:$(plinkfile).bim
 	plink --bfile $(plinkfile) \
 --extract $(snplist_c1) \
 --reference-allele $(snplist) \
