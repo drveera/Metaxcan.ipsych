@@ -5,8 +5,8 @@
 
 
 #check the allele match again
-rsids.mismatch.verify: $(outname).mismatch.removed.bim $(snplist)
-	Rscript $(sd)/allele.check.R $(outname).mismatch.removed.bim $(snplist)
+$(outname).rsids.mismatch.verify: $(outname).mismatch.removed.bim $(snplist)
+	Rscript $(sd)/allele.check.R $(outname).mismatch.removed.bim $(snplist) $(outname).rsids.mismatch.verify
 
 #remove the allele mismatched snps from the plink file
 
@@ -19,8 +19,8 @@ $(outname).mismatch.removed.bed:rsids.mismatch  $(outname).bed
 
 
 # check if the alleles match between bim and list files
-rsids.mismatch:$(outname).bim $(snplist)
-	Rscript $(sd)/allele.check.R $(outname).bim $(snplist)
+$(outname).rsids.mismatch:$(outname).bim $(snplist)
+	Rscript $(sd)/allele.check.R $(outname).bim $(snplist) $(outname).rsids.mismatch
 
 #extract the snps forcing the reference-allele to 
 $(outname).bed:$(plinkfile).bed
