@@ -17,8 +17,8 @@ dblist.files <- readLines(args[1])
 
                                         #names(snp) <- c("rsid","gene")
 dblist <- list()
-for (i in dblist.files){
-    dblist[i] <- read.csv(i, header = TRUE)
+for (i in 1:length(dblist.files)){
+    dblist[[i]] <- read.csv(dblist.files[i], header = TRUE)
 }
 
 
