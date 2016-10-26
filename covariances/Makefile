@@ -1,5 +1,10 @@
 #!/bin/make
 
+
+# calculate allele frequencies
+$(outname).maf:$(outname).gen $(outname).mismatch.removed.bim
+	plink --bfile $(outname).mismatch.removed \
+--freq --out $(outname)
 # write oxford format
 
 $(outname).gen:$(outname).mismatch.removed.bim $(outname).snps.not.extracted $(outname).rsids.mismatch.verify
