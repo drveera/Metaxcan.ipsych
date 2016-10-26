@@ -13,6 +13,7 @@ rsids.mismatch.verify: $(outname).mismatch.removed.bim $(snplist)
 $(outname).mismatch.removed.bed:rsids.mismatch  $(outname).bed
 	plink --bfile $(outname) \
 --exclude rsids.mismatch \
+--reference-allele $(snplist) \
 --make-bed \
 --out $(outname).mismatch.removed
 
