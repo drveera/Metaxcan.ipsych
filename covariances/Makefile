@@ -13,7 +13,7 @@ $(outname).maf:$(outname).frq
 	awk '{print $5}' $(outname).frq | sed 1d > $(outname).maf 
 
 # calculate allele frequencies
-$(outname).frq:$(outname).gen $(outname).mismatch.removed.bim
+$(outname).frq:$(outname).gen.traw $(outname).mismatch.removed.bim
 	plink --bfile $(outname).mismatch.removed \
 --freq --out $(outname)
 
