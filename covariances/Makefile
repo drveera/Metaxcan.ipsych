@@ -10,7 +10,7 @@ $(outname).rsids.mismatch.verify: $(outname).mismatch.removed.bim $(snplist) $(o
 
 #remove the allele mismatched snps from the plink file
 
-$(outname).mismatch.removed.bim:rsids.mismatch  $(outname).bim
+$(outname).mismatch.removed.bim:$(outname).rsids.mismatch  $(outname).bim
 	plink --bfile $(outname) \
 --exclude rsids.mismatch \
 --reference-allele $(snplist) \
