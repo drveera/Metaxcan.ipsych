@@ -3,6 +3,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 ##args1 bim file
 ##args2 list file
+## args3 outfile
 
 bim <- read.table(args[1])
                                         #4th column is a1 allele
@@ -20,7 +21,7 @@ dfm <- merge(bim,snp,by="rsid")
 
 dfm.sub <- dfm[! dfm$A1 == dfm$a1,]
 
-write.table(dfm.sub$rsid,"rsids.mismatch", sep = "\t", quote = FALSE,
+write.table(dfm.sub$rsid,args[3], sep = "\t", quote = FALSE,
             row.names = FALSE, col.names = FALSE)
 
 
