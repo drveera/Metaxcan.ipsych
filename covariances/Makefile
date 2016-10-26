@@ -25,7 +25,7 @@ $(outname).rsids.mismatch:$(outname).bim $(outname).snplist
 	Rscript $(sd)/allele.check.R $(outname).bim $(outname).snplist $(outname).rsids.mismatch
 
 #extract the snps forcing the reference-allele to 
-$(outname).bim:$(plinkfile).bim
+$(outname).bim:$(plinkfile).bim $(outname).snplist.c1 $(outname).snplist
 	plink --bfile $(plinkfile) \
 --extract $(outname).snplist.c1 \
 --reference-allele $(outname).snplist \
