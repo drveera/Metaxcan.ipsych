@@ -5,7 +5,7 @@
 
 
 #check the allele match again
-$(outname).rsids.mismatch.verify: $(outname).mismatch.removed.bim $(snplist)
+$(outname).rsids.mismatch.verify: $(outname).mismatch.removed.bim $(snplist) $(outname).rsids.mismatch
 	Rscript $(sd)/allele.check.R $(outname).mismatch.removed.bim $(snplist) $(outname).rsids.mismatch.verify
 
 #remove the allele mismatched snps from the plink file
