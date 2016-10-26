@@ -2,24 +2,27 @@
 args <- commandArgs(trailingOnly = TRUE)
 
 ##args1 bim file
-##args2 list file
-## args3 outfile
+##args2 csv file
+##args3 outfile
 
 bim <- read.table(args[1])
                                         #4th column is a1 allele
 names(bim) <- c("chrom","rsid","v3","pos","A1","A2")
-bim$A1 <- as.character(bim$A1)
+class(bim$A2) <- "character"
+class(bim$A1) <- "character"
 
-snp <- read.table(args[2])
+
+snp <- read.csv(args[2], header = TRUE)
+
                                         #2nd column is a1 allele
-names(snp) <- c("rsid","a1")
-snp$a1 <- as.character(snp$a1)
+class(snp$ref_allele) <- "character"
+class(snp$eff_allele) <- "character"
 
-print("read both files")
+
 
 dfm <- merge(bim,snp,by="rsid")
 
-dfm.sub <- dfm[! dfm$A1 == dfm$a1,]
+dfm.sub <- dfm[!(dfm$A1 == dfm$eff_allele & dfm$A2 == dfm$ref_allele),]
 
 write.table(dfm.sub$rsid,args[3], sep = "\t", quote = FALSE,
             row.names = FALSE, col.names = FALSE)
