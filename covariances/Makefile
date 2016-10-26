@@ -41,4 +41,4 @@ $(outname).snplist:$(outname).weights.csv
 
 #extract the weights
 $(outname).weights.csv: $(db) 
-	sh $(sd)/extract.weights.sh $(db) > $(outname)weights.csv
+	sh $(sd)/extract.weights.sh $(db) > $(outname).weights.csv
