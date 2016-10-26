@@ -4,7 +4,7 @@
 # format in to predixcan
 #predixcan file
 $(outname).dosage.gz:$(outname).first5columns $(outname).maf $(outname).gen.traw
-	paste $(outname).first5columns $(outname).maf `cut -f 7- $(outname).gen.traw` | sed 1d > $(outname).dosage.gz
+	paste $(outname).first5columns $(outname).maf `cut -f 7- $(outname).gen.traw` | sed 1d > $(outname).dosage
 # first 5 columns
 $(outname).first5columns:$(outname).gen.traw
 	awk '{print "chr" $$1 "\t" $$2 "\t" $$4 "\t" $$6 "\t" $$5}' $(outname).gen.traw > $(outname).first5columns 
