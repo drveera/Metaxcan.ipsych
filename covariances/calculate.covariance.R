@@ -12,15 +12,13 @@ library(reshape2)
 library(parallel)
 
 cat("Reading snp files","\n")
-dbfolders <- readLines("dbfolder.list")
+dblist.files <- readLines(args[1])
                                         #snp <- read.table(args[1])
 
                                         #names(snp) <- c("rsid","gene")
 dblist <- list()
-for (i in 1:length(dbfolders)){
-    dfm <- read.table(paste0(dbfolders[i],"/",args[1]))
-    names(dfm) <- c("rsid","gene")
-    dblist[[i]] <- dfm
+for (i in dblist.files){
+    dblist[i] <- read.csv(i, header = TRUE)
 }
 
 
@@ -36,7 +34,7 @@ cal.cov <- function(dfm){
     dose.cov.matrix <- cov(dose.sub.matrix)
     dose.cov.melted <- melt(dose.cov.matrix)
     names(dose.cov.melted) <- c("RSID1","RSID2","VALUE")
-    GENE <- rep(dfm[1,2],nrow(dose.cov.melted))
+    GENE <- rep(dfm$gene[1],nrow(dose.cov.melted))
     return(cbind(GENE,dose.cov.melted))
 }
 
