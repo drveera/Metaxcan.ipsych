@@ -22,7 +22,7 @@ snp$eff_allele <- as.character(snp$eff_allele)
 
 dfm <- merge(bim,snp,by="rsid")
 
-dfm.sub <- dfm[!(dfm$A1 == dfm$eff_allele & dfm$A2 == dfm$ref_allele),]
+dfm.sub <- dfm[!(dfm$A1 == dfm$ref_allele & dfm$A2 == dfm$eff_allele),]
 
 write.table(dfm.sub$rsid,args[3], sep = "\t", quote = FALSE,
             row.names = FALSE, col.names = FALSE)
