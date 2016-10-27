@@ -28,7 +28,9 @@ cat("Reading dose file \n")
 dose <- fread(paste0("zcat ",args[2]))
 names(dose)[2] <- "rsid"
 
+cat("merging \n")
 dose.merge <- merge(dbcsv[,c("rsid","gene")], dose, by = "rsid")
+cat("the class of merge data fame ", class(dose.merge))
 
 
 cal.cov <- function(dfm){
@@ -43,11 +45,19 @@ cal.cov <- function(dfm){
 
 
 
+cat("splitting the data frame by gene \n")
 dose.split <- split(dose.merge, dose.merge$rsid)
 
+cat("applying the cal.cov function \n")
 doselst <- lapply(dose.split, cal.cov)
+cat("done!")
+
+cat("merging back")
 doselst <- do.call(rbind,doselst)
-write.table(doselst,paste0(basename(args[1]),".covariance.matrix"),row.names = FALSE, col.names = FALSE, quote = FALSE)    
+
+cat("writing the file")
+write.table(doselst,paste0(basename(args[1]),".covariance.matrix"),row.names = FALSE, col.names = FALSE, quote = FALSE)
+cat("completed!")
 
 
 
