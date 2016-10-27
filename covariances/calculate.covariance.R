@@ -16,11 +16,12 @@ dblist.files <- readLines(args[1])
                                         #snp <- read.table(args[1])
 
                                         #names(snp) <- c("rsid","gene")
-dblist <- list()
-for (i in 1:length(dblist.files)){
-    dblist[[i]] <- read.csv(dblist.files[i], header = TRUE)
-}
+#dblist <- list()
+#for (i in 1:length(dblist.files)){
+#    dblist[[i]] <- read.csv(dblist.files[i], header = TRUE)
+#}
 
+dbcsv <- read.csv(args[1], header = TRUE)
 
 cat("Reading dose file")
 dose <- fread(paste0("zcat ",args[2]))
@@ -41,13 +42,13 @@ cal.cov <- function(dfm){
 }
 
 
-for (i in 1:length(dblist)){
-snp.split <- split(dblist[[i]],dblist[[i]]$gene)
+
+snp.split <- split(dbcsv,dbcsv$gene)
 #doselst <- mclapply(snp.split,cal.cov,mc.cores = 4)
 doselst <- lapply(snp.split, cal.cov)
 doselst <- do.call(rbind,doselst)
-write.table(doselst,paste0(dblist.files[i],".covariance.matrix"),row.names = FALSE, col.names = FALSE, quote = FALSE)    
-}
+write.table(doselst,paste0(basename(args[1]),".covariance.matrix"),row.names = FALSE, col.names = FALSE, quote = FALSE)    
+
 
 
 
