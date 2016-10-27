@@ -5,14 +5,12 @@ $(outname).weights.csv.covariance.matrix:$(outname).dosage.gz
 	Rscript $(sd)/calculate.covariance.R $(outname).weights.csv $(outname).dosage.gz
 	gzip $(outname).weights.csv.covariance.matrix 
 
-$(outname).dosage.gz:$(outname).dosage 
-	gzip $(outname).dosage 
-
 # format in to predixcan
 #predixcan file
-$(outname).dosage:$(outname).first5columns $(outname).maf $(outname).gen.traw
+$(outname).dosage.gz:$(outname).first5columns $(outname).maf $(outname).gen.traw
 	cut -f 7- $(outname).gen.traw > $(outname).doses
 	paste $(outname).first5columns $(outname).maf $(outname).doses | sed 1d > $(outname).dosage
+	gzip $(outname).dosage
 
 # first 5 columns
 $(outname).first5columns:$(outname).gen.traw
