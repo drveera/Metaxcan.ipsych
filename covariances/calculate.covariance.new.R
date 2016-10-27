@@ -49,7 +49,8 @@ cat("splitting the data frame by gene \n")
 dose.split <- split(dose.merge, dose.merge$rsid)
 
 cat("applying the cal.cov function \n")
-doselst <- lapply(dose.split, cal.cov)
+doselst <- mclapply(snp.split,cal.cov,mc.cores = 4)
+#doselst <- lapply(dose.split, cal.cov)
 cat("done!")
 
 cat("merging back")
