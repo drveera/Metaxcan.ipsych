@@ -11,8 +11,8 @@ library(data.table)
 library(reshape2)
 library(parallel)
 
-cat("Reading snp files","\n")
-dblist.files <- readLines(args[1])
+
+
                                         #snp <- read.table(args[1])
 
                                         #names(snp) <- c("rsid","gene")
@@ -21,13 +21,14 @@ dblist.files <- readLines(args[1])
 #    dblist[[i]] <- read.csv(dblist.files[i], header = TRUE)
 #}
 
+cat("reading csv file \n")
 dbcsv <- read.csv(args[1], header = TRUE)
 
-cat("Reading dose file")
+cat("Reading dose file \n")
 dose <- fread(paste0("zcat ",args[2]))
 names(dose)[2] <- "rsid"
 
-dose.merge <- merge(db[,c("rsid","gene")], dose, by = "rsid")
+dose.merge <- merge(dbcsv[,c("rsid","gene")], dose, by = "rsid")
 
 
 cal.cov <- function(dfm){
