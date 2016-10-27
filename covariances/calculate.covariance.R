@@ -31,6 +31,7 @@ dose <- fread(paste0("zcat ",args[2]))
 cal.cov <- function(dfm){
     dose.sub <- dose[V2 %in% dfm$rsid]
     dose.sub.matrix <- t(dose.sub[,7:ncol(dose.sub),with=FALSE])
+    dose.sub.matrix <- dose.sub.matrix[complete.cases(dose.sub.matrix),]
     colnames(dose.sub.matrix) <- dose.sub$V2
     dose.cov.matrix <- cov(dose.sub.matrix, use = "na.or.complete")
     dose.cov.melted <- melt(dose.cov.matrix)
