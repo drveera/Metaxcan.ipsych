@@ -58,7 +58,10 @@ doselst <- dose.merge %>%
     group_by(rsid) %>%
     cal.cov
 
-cat("done!")
+cat("done! \n")
+
+print(class(doselst))
+
 
 #cat("merging back")
 #doselst <- do.call(rbind,doselst)
