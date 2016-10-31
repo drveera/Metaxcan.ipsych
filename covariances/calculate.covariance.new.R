@@ -53,6 +53,7 @@ cal.cov <- function(dfm){
 #doselst <- lapply(dose.split, cal.cov)
 
 library(dplyr)
+library(dtplyr)
 doselst <- dose.merge %.%
     group_by(rsid) %.%
     cal.cov
