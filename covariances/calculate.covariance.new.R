@@ -54,8 +54,8 @@ cal.cov <- function(dfm){
 
 library(dplyr)
 library(dtplyr)
-doselst <- dose.merge %.%
-    group_by(rsid) %.%
+doselst <- dose.merge %>%
+    group_by(rsid) %>%
     cal.cov
 
 cat("done!")
