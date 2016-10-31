@@ -45,16 +45,22 @@ cal.cov <- function(dfm){
 
 
 
-cat("splitting the data frame by gene \n")
-dose.split <- split(dose.merge, dose.merge$rsid)
+#cat("splitting the data frame by gene \n")
+#dose.split <- split(dose.merge, dose.merge$rsid)
 
-cat("applying the cal.cov function \n")
-doselst <- mclapply(dose.split,cal.cov,mc.cores = 4)
+#cat("applying the cal.cov function \n")
+#doselst <- mclapply(dose.split,cal.cov,mc.cores = 4)
 #doselst <- lapply(dose.split, cal.cov)
+
+library(dplyr)
+doselst <- dose.merge %.%
+    group_by(rsid) %.%
+    cal.cov
+
 cat("done!")
 
-cat("merging back")
-doselst <- do.call(rbind,doselst)
+#cat("merging back")
+#doselst <- do.call(rbind,doselst)
 
 cat("writing the file")
 write.table(doselst,paste0(basename(args[1]),".covariance.matrix"),row.names = FALSE, col.names = FALSE, quote = FALSE)
