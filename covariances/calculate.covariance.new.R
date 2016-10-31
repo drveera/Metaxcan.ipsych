@@ -61,6 +61,8 @@ doselst <- dose.merge %>%
 cat("done! \n")
 
 print(class(doselst))
+print(head(doselst))
+print(dim(doselst))
 
 
 #cat("merging back")
