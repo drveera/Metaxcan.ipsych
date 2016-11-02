@@ -23,7 +23,7 @@ $(outcome).covariance.matrix.gz:$(outcome)%covariance.matrix.gz $(outcome).chr22
 
 
 #calculate the covariance
-$(outname)%covariance.matrix.gz:$(outname)%dosage.gz
+$(outname).chr22.covariance.matrix.gz:$(outname)%dosage.gz
 	for i in `seq 22`; do \
 Rscript $(sd)/calculate.covariance.new.R $(outname).weights.csv $(outname).chr$$i.dosage.gz $(outname).chr$$i.covariance.matrix; \
 gzip $(outname).chr$$i.covariance.matrix; \
@@ -31,7 +31,7 @@ done
 
 # format in to predixcan
 #predixcan file
-$(outname)%dosage.gz:$(outname)%first5columns $(outname)%maf $(outname)%gen.traw
+$(outname).chr22.dosage.gz:$(outname)%first5columns $(outname)%maf $(outname)%gen.traw
 	for i in `seq 22`; do \
 cut -f 7- $(outname).chr$$i.gen.traw > $(outname).chr$$i.doses; \
 paste $(outname).chr$$i.first5columns $(outname).chr$$i.maf $(outname).chr$$i.doses | sed 1d > $(outname).chr$$i.dosage; \
@@ -41,19 +41,19 @@ done
 
 
 # first 5 columns
-$(outname)%first5columns:$(outname)%gen.traw
+$(outname).chr22.first5columns:$(outname)%gen.traw
 	for i in `seq 22`; do \
 awk '{print "chr" $$1 "\t" $$2 "\t" $$4 "\t" $$6 "\t" $$5}' $(outname).chr$$i.gen.traw > $(outname).chr$$i.first5columns; \
 done
 
 # maf column
-$(outname)%maf:$(outname)%frq
+$(outname).chr22.maf:$(outname)%frq
 	for i in `seq 22`; do \
 awk '{print $$5}' $(outname).chr$$i.frq | sed 1d > $(outname).chr$$i.maf ; \
 done
 
 # calculate allele frequencies
-$(outname)%frq:$(outname)%gen.traw $(outname).mismatch.removed.bim
+$(outname).chr22.frq:$(outname)%gen.traw $(outname).mismatch.removed.bim
 	for i in `seq 22`; \
 do \
 plink --bfile $(outname).mismatch.removed \
@@ -61,7 +61,7 @@ plink --bfile $(outname).mismatch.removed \
 done;
 
 # write recode A-transpose format
-$(outname)%gen.traw:$(outname).mismatch.removed.bim $(outname).snps.not.extracted $(outname).rsids.mismatch.verify
+$(outname).chr22.gen.traw:$(outname).mismatch.removed.bim $(outname).snps.not.extracted $(outname).rsids.mismatch.verify
 	for i in `seq 22`; \
 do \
 	plink --bfile $(outname).mismatch.removed \
