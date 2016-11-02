@@ -35,6 +35,7 @@ cat("the class of merge data fame ", class(dose.merge))
 
 cal.cov <- function(dfm){
     dose.sub.matrix <- t(dfm[,8:ncol(dfm)])
+    dose.sub.matrix <- dose.sub.matrix[complete.cases(dose.sub.matrix),]
     colnames(dose.sub.matrix) <- dfm$rsid
     dose.cov.matrix <- cov(dose.sub.matrix, use = "na.or.complete")
     dose.cov.melted <- melt(dose.cov.matrix)
