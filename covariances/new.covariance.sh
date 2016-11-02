@@ -21,7 +21,7 @@ outname=$(basename $db)
 #softwares
 source /com/extra/plink/1.90-beta-2016-03/load.sh
 
-make $outname.chr1.covariance.matrix.gz -f $sd/Makefile  plinkfile=$plinkfile outname=$outname sd=$sd db=$db $3
+make $outname.covariance.matrix.gz -f $sd/Makefile  plinkfile=$plinkfile outname=$outname sd=$sd db=$db $3
 
 
 
