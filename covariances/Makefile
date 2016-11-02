@@ -14,6 +14,7 @@ $(outname)%dosage.gz:$(outname)%first5columns $(outname)%maf $(outname)%gen.traw
 cut -f 7- $(outname).chr$$i.gen.traw > $(outname).chr$$i.doses; \
 paste $(outname).first5columns $(outname).chr$$i.maf $(outname).chr$$i.doses | sed 1d > $(outname).chr$$i.dosage; \
 gzip $(outname).chr$$i.dosage; \
+echo "chrom$$i done!"; \
 done
 
 
