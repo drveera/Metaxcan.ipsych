@@ -34,7 +34,7 @@ $(outname)%frq:$(outname)%gen.traw $(outname).mismatch.removed.bim
 	for i in `seq 22`; \
 do \
 plink --bfile $(outname).mismatch.removed \
---freq --out $(outname).chr.$$i; \
+--freq --out $(outname).chr$$i; \
 done;
 
 # write recode A-transpose format
