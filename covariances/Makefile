@@ -3,7 +3,7 @@
 #calculate the covariance
 $(outname)%covariance.matrix.gz:$(outname)%dosage.gz
 	for i in `seq 22`; do \
-Rscript $(sd)/calculate.covariance.new.R $(outname).weights.csv $(outname).chr$$i.dosage.gz $(outname).chr$$i.covariance.matrix \
+Rscript $(sd)/calculate.covariance.new.R $(outname).weights.csv $(outname).chr$$i.dosage.gz $(outname).chr$$i.covariance.matrix; \
 gzip $(outname).chr$$i.covariance.matrix; \
 done 
 
@@ -11,8 +11,8 @@ done
 #predixcan file
 $(outname)%dosage.gz:$(outname)%first5columns $(outname)%maf $(outname)%gen.traw
 	for i in `seq 22`; do \
-cut -f 7- $(outname).chr$$i.gen.traw > $(outname).chr$$i.doses \
-paste $(outname).first5columns $(outname).chr$$i.maf $(outname).chr$$i.doses | sed 1d > $(outname).chr$$i.dosage \
+cut -f 7- $(outname).chr$$i.gen.traw > $(outname).chr$$i.doses; \
+paste $(outname).first5columns $(outname).chr$$i.maf $(outname).chr$$i.doses | sed 1d > $(outname).chr$$i.dosage; \
 gzip $(outname).chr$$i.dosage; \
 done
 
