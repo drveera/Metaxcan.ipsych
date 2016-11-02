@@ -1,7 +1,7 @@
 #!/bin/make
 
 #calculate the covariance
-$(outname).%.covariance.matrix:$(outname).%.dosage.gz
+$(outname).%.covariance.matrix.gz:$(outname).%.dosage.gz
 	for i in `seq 22`; do \
 Rscript $(sd)/calculate.covariance.new.R $(outname).weights.csv $(outname).chr$$i.dosage.gz $(outname).chr$$i.covariance.matrix \
 gzip $(outname).chr$$i.covariance.matrix; \
