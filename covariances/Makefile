@@ -1,5 +1,27 @@
 #!/bin/make
 
+#run the predixcan predicitons
+$(outcome).predicted.expression:$(outcome)%dosage.gz
+	mkdir /home/iveera/iveer_igdata/predixcan/predicted_expressions/1Kg_New/$(outcome).folder
+	$(predixcan) --predict --dosages $$PWD \
+--dosages_prefix $(outcome) \
+--samples ipsych_samples.txt \
+--weights $(db) \
+--output /home/iveera/iveera_igdata/predixcan/predicted_expressions/1Kg_New/$(outcome).folder
+
+#remove chromosome covariance files
+remove.ok:$(outcome).covariance.matrix.gz
+	rm $(outcome).chr*covariance.matrix.gz
+	touch remove.ok
+
+#combine the covariance files
+$(outcome).covariance.matrix.gz:$(outcome)%covariance.matrix.gz $(outcome).chr22.covariance.matrix.gz
+	echo "GENE RSID1 RSID2 VALUE" > $(outcome).matrix.head
+	gzip $(outcome).matrix.head
+	cat $(outcome).matrix.head.gz $(outcome).*.covariance.matrix.gz > $(outcome).covariance.matrix.gz
+	rm $(outcome).matrix.head
+
+
 #calculate the covariance
 $(outname)%covariance.matrix.gz:$(outname)%dosage.gz
 	for i in `seq 22`; do \

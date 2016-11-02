@@ -71,3 +71,10 @@ print(dim(doselst))
 cat("writing the file")
 write.table(doselst,args[3],row.names = FALSE, col.names = FALSE, quote = FALSE)
 cat("completed!")
+
+
+
+
+
+
+
