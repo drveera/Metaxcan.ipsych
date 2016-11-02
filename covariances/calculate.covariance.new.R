@@ -69,7 +69,7 @@ print(dim(doselst))
 #doselst <- do.call(rbind,doselst)
 
 cat("writing the file")
-write.table(doselst,paste0(basename(args[1]),".covariance.matrix"),row.names = FALSE, col.names = FALSE, quote = FALSE)
+write.table(doselst,args[3],row.names = FALSE, col.names = FALSE, quote = FALSE)
 cat("completed!")
 
 
