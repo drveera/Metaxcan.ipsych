@@ -37,7 +37,7 @@ cal.cov <- function(dfm){
     dose.sub.matrix <- t(dfm[,8:ncol(dfm)])
     dose.sub.matrix <- dose.sub.matrix[complete.cases(dose.sub.matrix),]
     colnames(dose.sub.matrix) <- dfm$rsid
-    dose.cov.matrix <- cov(dose.sub.matrix, use = "na.or.complete")
+    dose.cov.matrix <- cov(dose.sub.matrix)
     dose.cov.melted <- melt(dose.cov.matrix)
     names(dose.cov.melted) <- c("RSID1","RSID2","VALUE")
     GENE <- rep(dfm$gene[1],nrow(dose.cov.melted))
