@@ -37,10 +37,10 @@ imputeNA <- function(vec){
 }
 
 cat("imputing the NAs \n")
-newdoseA <- dose[,1:6,with=FALSE]
+newdoseA <- dose[,1:5,with=FALSE]
 print(head(newdoseA))
 print(nrow(newdoseA))
-newdoseB <- apply(dose,1,function(x) imputeNA(x[7:length(x)]))
+newdoseB <- apply(dose,1,function(x) imputeNA(x[6:length(x)]))
 newdoseB <- as.data.frame(t(newdoseB))
 print(head(newdoseB[,1:10]))
 print(nrow(newdoseB))
