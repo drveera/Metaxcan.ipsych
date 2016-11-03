@@ -46,6 +46,7 @@ newdoseB <- apply(dose.merge,1,function(x) imputeNA(x[6:length(x)]))
 newdoseB <- as.data.frame(t(newdoseB))
 newdose <- as.data.frame(rbind(newdoseA,newdoseB))
 cat("done \n")
+warnings()
 
 newdosename=gsub(".gz","",args[2])
 cat("writing the new dosage file\n")
