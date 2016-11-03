@@ -36,7 +36,7 @@ cat("the class of merge data fame ", class(dose.merge))
 imputeNA <- function(x){
     #column 6 is maf
     imputedvalue <- x[6]*2
-    return(gsub("NA",imputedvalue,x))
+    return(as.data.frame(gsub("NA",imputedvalue,x)))
 }
 
 cal.cov <- function(dfm){
@@ -59,9 +59,10 @@ cal.cov <- function(dfm){
 #doselst <- lapply(dose.split, cal.cov)
 
 library(dplyr)
+
 newdose <- dose.merge %>%
     rowwise() %>%
-    do(imputeNA)
+    do(imputeNA(.))
 
 newdose_name=convert = gsub(".gz","",args[2])
 write.table(newdose,newdose_name,row.names = FALSE, col.names = FALSE, quote = FALSE)
