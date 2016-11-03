@@ -56,7 +56,7 @@ cal.cov <- function(dfm){
 
 library(dplyr)
 
-newdose <- apply(dose.merge,1,function(x) return(gsub("NA",x[6]*2,x)))
+newdose <- apply(dose.merge,1,function(x) return(gsub("NA",as.numeric(x[6])*2,x)))
 newdose <- as.data.frame(t(newdose))
 
 newdose_name=gsub(".gz","",args[2])
