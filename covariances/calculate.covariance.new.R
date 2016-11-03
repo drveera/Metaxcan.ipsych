@@ -34,11 +34,27 @@ cal.cov <- function(dfm){
     return(cbind(GENE,dose.cov.melted))
 }
 
+imputeNA <- function(vec){
+    vec <- as.numeric(as.character(vec))
+    vec <- replace(vec,is.na(vec),vec[1])
+    return(vec)
+}
 
+cat("imputing the NAs \n")
+newdoseA <- dose.merge[,1:5]
+newdoseB <- apply(dose.merge,1,function(x) imputeNA(x[6:length(x)]))
+newdoseB <- as.data.frame(t(newdoseB))
+newdose <- as.data.frame(rbind(newdoseA,newdoseB))
+cat("done \n")
+
+newdosename=gsub(".gz","",args[2])
+cat("writing the new dosage file\n")
+write.table(newdose,paste0(newdosename,".new.dosage"), row.names=F,col.names=F,quote=F)
+cat("done \n")
 library(dplyr)
 
 cat("calculating cov \n")
-doselst <- dose.merge %>%
+doselst <- newdose %>%
     group_by(gene) %>%
     do(cal.cov(.))
 
