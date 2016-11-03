@@ -42,6 +42,8 @@ imputeNA <- function(vec){
 
 cat("imputing the NAs \n")
 newdoseA <- dose.merge[,1:5]
+print(head(newdoseA))
+print(ncol(newdoseA))
 newdoseB <- apply(dose.merge,1,function(x) imputeNA(x[6:length(x)]))
 newdoseB <- as.data.frame(t(newdoseB))
 newdose <- as.data.frame(rbind(newdoseA,newdoseB))
