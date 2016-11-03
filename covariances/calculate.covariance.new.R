@@ -17,11 +17,7 @@ dbcsv <- read.csv(args[1], header = TRUE)
 
 cat("Reading dose file \n")
 dose <- fread(paste0("zcat ",args[2]))
-names(dose)[2] <- "rsid"
 
-cat("merging \n")
-dose.merge <- merge(dbcsv[,c("rsid","gene")], dose, by = "rsid")
-cat("the class of merge data fame ", class(dose.merge))
 
 
 cal.cov <- function(dfm){
@@ -41,17 +37,19 @@ imputeNA <- function(vec){
 }
 
 cat("imputing the NAs \n")
-newdoseA <- dose.merge[,1:6]
+newdoseA <- dose[,1:6,with=FALSE]
 print(head(newdoseA))
 print(nrow(newdoseA))
-newdoseB <- apply(dose.merge,1,function(x) imputeNA(x[7:length(x)]))
+newdoseB <- apply(dose,1,function(x) imputeNA(x[7:length(x)]))
 newdoseB <- as.data.frame(t(newdoseB))
 print(head(newdoseB[,1:10]))
 print(nrow(newdoseB))
 newdose <- as.data.frame(cbind(newdoseA,newdoseB))
-
+names(newdose)[2] <- "rsid"
 cat("done \n")
 
+cat("merging \n")
+dose.merge <- merge(dbcsv[,c("rsid","gene")], newdose, by = "rsid")
 
 newdosename=gsub(".gz","",args[2])
 cat("writing the new dosage file\n")
@@ -60,7 +58,7 @@ cat("done \n")
 library(dplyr)
 
 cat("calculating cov \n")
-doselst <- newdose %>%
+doselst <- dose.merge %>%
     group_by(gene) %>%
     do(cal.cov(.))
 
