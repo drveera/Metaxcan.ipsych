@@ -43,14 +43,15 @@ imputeNA <- function(vec){
 cat("imputing the NAs \n")
 newdoseA <- dose.merge[,1:5]
 print(head(newdoseA))
-print(ncol(newdoseA))
+print(nrow(newdoseA))
 newdoseB <- apply(dose.merge,1,function(x) imputeNA(x[6:length(x)]))
 newdoseB <- as.data.frame(t(newdoseB))
-prin(head(newdoseB[,1:10]))
+print(head(newdoseB[,1:10]))
+print(nrow(newdoseB))
 newdose <- as.data.frame(rbind(newdoseA,newdoseB))
 
 cat("done \n")
-warnings()
+
 
 newdosename=gsub(".gz","",args[2])
 cat("writing the new dosage file\n")
