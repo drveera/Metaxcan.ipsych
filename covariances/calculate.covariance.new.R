@@ -46,7 +46,9 @@ print(head(newdoseA))
 print(ncol(newdoseA))
 newdoseB <- apply(dose.merge,1,function(x) imputeNA(x[6:length(x)]))
 newdoseB <- as.data.frame(t(newdoseB))
+prin(head(newdoseB[,1:10]))
 newdose <- as.data.frame(rbind(newdoseA,newdoseB))
+
 cat("done \n")
 warnings()
 
