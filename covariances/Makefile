@@ -36,7 +36,7 @@ done
 # maf column
 $(outname)%maf:$(outname)%frq
 	for i in `seq 22`; do \
-awk '{print $$5}' $(outname).chr$$i.frq | sed 1d > $(outname).chr$$i.maf ; \
+awk '{print $$5}' $(outname).chr$$i.frq > $(outname).chr$$i.maf ; \
 done
 
 # calculate allele frequencies
