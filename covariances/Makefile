@@ -2,11 +2,11 @@
 
 
 #combine the covariance files
-$(outcome).covariance.matrix.gz:$(outcome)%covariance.matrix.gz $(outcome).chr22.covariance.matrix.gz
-	echo "GENE RSID1 RSID2 VALUE" > $(outcome).matrix.head
-	gzip $(outcome).matrix.head
-	cat $(outcome).matrix.head.gz $(outcome).*.covariance.matrix.gz > $(outcome).covariance.matrix.gz
-	rm $(outcome).matrix.head
+$(outcome).covariance.matrix.gz:$(outname).chr22.covariance.matrix.gz
+	echo "GENE RSID1 RSID2 VALUE" > $(outname).matrix.head
+	gzip $(outname).matrix.head
+	cat $(outname).matrix.head.gz $(outname).*.covariance.matrix.gz > $(outname).covariance.matrix.gz
+	rm $(outname).matrix.head
 
 
 #calculate the covariance

@@ -33,6 +33,12 @@ dose.merge <- merge(dbcsv[,c("rsid","gene")], dose, by = "rsid")
 cat("the class of merge data fame ", class(dose.merge))
 
 
+imputeNA <- function(x){
+    #column 6 is maf
+    imputedvalue <- x[6]*2
+    return(gsub("NA",imputedvalue,x))
+}
+
 cal.cov <- function(dfm){
     dose.sub.matrix <- t(dfm[,8:ncol(dfm)])
     colnames(dose.sub.matrix) <- dfm$rsid
@@ -53,8 +59,16 @@ cal.cov <- function(dfm){
 #doselst <- lapply(dose.split, cal.cov)
 
 library(dplyr)
+newdose <- dose.merge %>%
+    rowwise() %>%
+    do(imputeNA)
 
-doselst <- dose.merge %>%
+newdose_name=convert = gsub(".gz","",args[2])
+write.table(newdose,newdose_name,row.names = FALSE, col.names = FALSE, quote = FALSE)
+system(paste0("rm ",args[2]))
+system(paste0("gzip ",newdose_name))
+
+doselst <- newdose %>%
     group_by(gene) %>%
     do(cal.cov(.))
 
