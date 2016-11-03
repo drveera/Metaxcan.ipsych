@@ -41,14 +41,14 @@ imputeNA <- function(vec){
 }
 
 cat("imputing the NAs \n")
-newdoseA <- dose.merge[,1:5]
+newdoseA <- dose.merge[,1:6]
 print(head(newdoseA))
 print(nrow(newdoseA))
-newdoseB <- apply(dose.merge,1,function(x) imputeNA(x[6:length(x)]))
+newdoseB <- apply(dose.merge,1,function(x) imputeNA(x[7:length(x)]))
 newdoseB <- as.data.frame(t(newdoseB))
 print(head(newdoseB[,1:10]))
 print(nrow(newdoseB))
-newdose <- as.data.frame(rbind(newdoseA,newdoseB))
+newdose <- as.data.frame(cbind(newdoseA,newdoseB))
 
 cat("done \n")
 
