@@ -21,9 +21,8 @@ done
 $(outname)%dosage.gz:$(outname)%first5columns $(outname)%maf $(outname)%gen.traw
 	for i in `seq 22`; do \
 cut -f 7- $(outname).chr$$i.gen.traw > $(outname).chr$$i.doses; \
-paste $(outname).chr$$i.first5columns $(outname).chr$$i.maf $(outname).chr$$i.doses | sed 1d > $(outname).chr$$i.dosage.tmp; \
-sh $(sd)/imputeNA.sh $(outname).chr$$i.dosage.tmp > $(outname).chr$$i.dosage; \
-rm $(outname).chr$$i.dosage.tmp; \
+paste $(outname).chr$$i.first5columns $(outname).chr$$i.maf $(outname).chr$$i.doses | sed 1d > $(outname).chr$$i.dosage.tmp | $(sd)/imputeNA.sh $(outname).chr$$i.dosage.tmp > $(outname).chr$$i.dosage
+rm $(outname).chr$$i.dosage.tmp
 gzip $(outname).chr$$i.dosage; \
 echo "chrom$$i done!"; \
 done
