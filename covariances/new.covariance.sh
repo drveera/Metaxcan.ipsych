@@ -21,7 +21,19 @@ outname=$(basename $db)
 #softwares
 source /com/extra/plink/1.90-beta-2016-03/load.sh
 
-make $outname.covariance.matrix.gz -f $sd/Makefile  plinkfile=$plinkfile outname=$outname sd=$sd db=$db $3
+#make $outname.covariance.matrix.gz -f $sd/Makefile  plinkfile=$plinkfile outname=$outname sd=$sd db=$db $3
+
+for i in $(seq 22)
+do
+    echo"make $outname.chr$i.covariance.matrix.gz\
+-f $sd/Makefile2 \
+outname=$outname.chr$i \
+sd=$sd \
+db=$db "	 
+done > $outname.make2.adispatch
+
+#adispatch --mem=64g $outname.make2.adispatch 
+
 
 
 
