@@ -26,7 +26,7 @@ source /com/extra/plink/1.90-beta-2016-03/load.sh
 
 for i in $(seq 22)
 do
-    echo "make $outname.chr$i.covariance.matrix.gz \
+    echo "make $wd/$outname.chr$i.covariance.matrix.gz \
 -f $sd/Makefile2 \
 outname=$wd/$outname.chr$i \
 outname_nochr=$wd/$outname \
