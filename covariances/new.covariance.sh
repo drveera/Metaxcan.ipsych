@@ -32,9 +32,7 @@ outname_nochr=$outname \
 sd=$sd \
 db=$db \
 chr=$i "
-done > $outname.make2.adispatch
-
-adispatch --mem=64g $outname.make2.adispatch 
+done 
 
 
 
