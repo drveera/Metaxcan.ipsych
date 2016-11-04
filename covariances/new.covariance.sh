@@ -10,6 +10,7 @@ fi
 #inputs
 plinkfile=$1
 db=$2
+wd=$3
 
 #directories
 #script directory
@@ -27,8 +28,8 @@ for i in $(seq 22)
 do
     echo "make $outname.chr$i.covariance.matrix.gz \
 -f $sd/Makefile2 \
-outname=$outname.chr$i \
-outname_nochr=$outname \
+outname=$wd/$outname.chr$i \
+outname_nochr=$wd/$outname \
 sd=$sd \
 db=$db \
 chr=$i "
