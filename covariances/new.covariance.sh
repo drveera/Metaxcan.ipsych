@@ -28,6 +28,7 @@ do
     echo "make $outname.chr$i.covariance.matrix.gz \
 -f $sd/Makefile2 \
 outname=$outname.chr$i \
+outname_nochr=$outname \
 sd=$sd \
 db=$db \
 chr=$i "

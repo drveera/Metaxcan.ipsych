@@ -25,7 +25,7 @@ $(outname).frq:$(outname).gen.traw $(outname).mismatch.removed.bim
 --freq --out $(outname)
 
 # write recode A-transpose format
-$(outname).gen.traw:$(outname).mismatch.removed.bim $(outname).snps.not.extracted $(outname).rsids.mismatch.verify
+$(outname).gen.traw:$(outname_nochr).mismatch.removed.bim $(outname_nochr).snps.not.extracted $(outname_nochr).rsids.mismatch.verify
 	plink --bfile $(outname).mismatch.removed \
 --chr $(chr) \
 --recode A-transpose tab \
