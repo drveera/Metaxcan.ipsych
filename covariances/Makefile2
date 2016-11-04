@@ -27,5 +27,6 @@ $(outname).frq:$(outname).gen.traw $(outname).mismatch.removed.bim
 # write recode A-transpose format
 $(outname).gen.traw:$(outname).mismatch.removed.bim $(outname).snps.not.extracted $(outname).rsids.mismatch.verify
 	plink --bfile $(outname).mismatch.removed \
+--chr $(chr)
 --recode A-transpose tab \
 --out $(outname).gen
