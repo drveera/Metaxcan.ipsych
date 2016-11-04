@@ -21,12 +21,12 @@ $(outname).maf:$(outname).frq
 
 # calculate allele frequencies
 $(outname).frq:$(outname).gen.traw 
-	plink --bfile $(outname).mismatch.removed \
+	/com/extra/plink/1.90-beta-2016-03/bin/plink --bfile $(outname).mismatch.removed \
 --freq --out $(outname)
 
 # write recode A-transpose format
 $(outname).gen.traw:
-	plink --bfile $(outname).mismatch.removed \
+	 /com/extra/plink/1.90-beta-2016-03/bin/plink --bfile $(outname).mismatch.removed \
 --chr $(chr) \
 --recode A-transpose tab \
 --out $(outname).gen
