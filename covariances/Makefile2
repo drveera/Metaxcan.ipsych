@@ -2,7 +2,7 @@
 
 #calculate the covariance
 $(outname).covariance.matrix.gz:$(outname).dosage.gz
-	Rscript $(sd)/calculate.covariance.new.R $(outname).weights.csv $(outname).dosage.gz $(outname).covariance.matrix
+	Rscript $(sd)/calculate.covariance.new.R $(outname_nochr).weights.csv $(outname).dosage.gz $(outname).covariance.matrix
 	gzip $(outname).covariance.matrix 
 
 # format in to predixcan
