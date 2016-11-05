@@ -69,7 +69,8 @@ gene.assoc <- function(dfm,gene,outcome,cov){
     return(c(res1,res2))
 }
 
-system.time()
+ptm <- proc.time()
+
 cat("running logistic regression in 16 cores")
 result <- foreach (gene = genes,
                    .combine = rbind,
@@ -77,7 +78,8 @@ result <- foreach (gene = genes,
     gene.assoc(dfm,gene,outcome,covs)
 
 stopImplicitCluster()
-system.time()
+
+print(proc.time()-ptm)
 
 cat("done \n writing the results")
 
