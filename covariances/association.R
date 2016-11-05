@@ -40,6 +40,9 @@ dim(expression)
 cat("merge1: pheno and covariance files \n")
 pheno.cov <- merge(pheno,covariance, by = c("FID","IID"))
 
+pheno.cov$IID <- as.vector(pheno.cov$IID)
+pheno.cov$FID <- as.vector(pheno.cov$FID)
+
 cat("merge2 pheno.cov with expression \n")
 dfm <- merge(pheno.cov,expression, by = c("FID","IID"))
 
@@ -56,7 +59,10 @@ registerDoParallel(cl)
 gene.assoc <- function(dfm,gene,outcome,cov){
     fm <- as.formula(paste0(outcome,"~",outcome,"+",paste(cov,collapse = "+")))
     mod <- glm(fm,data= dfm)
-    return(summary(mod)$coefficients[2,])
+    mod.sum <- summary(mod)$coefficients
+    res1 <- row.names(mod.sum)[2]
+    res2 <- mod.sum[2,]
+    return(c(res1,res2))
 }
 
 result <- foreach (gene = genes,
