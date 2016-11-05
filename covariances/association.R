@@ -15,7 +15,7 @@ library(parallel)
 
 cat("reading fam file \n")
 fam <- read.table(args[2])
-fam <- fam[,1:2]
+fam <- fam[1:100,1:2]
 names(fam) <- c("FID","IID")
 
 print(head(fam))
