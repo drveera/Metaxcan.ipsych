@@ -46,8 +46,6 @@ pheno.cov$IID <- as.character(pheno.cov$IID)
 expression$IID <- as.vector(expression$IID)
 expression$FID <- as.vector(expression$FID)
 
-print(str(pheno.cov))
-print(str(expression[,1:10]))
 
 cat("merge2 pheno.cov with expression \n")
 dfm <- merge(pheno.cov,expression, by = c("FID","IID"))
@@ -78,7 +76,7 @@ result <- foreach (gene = genes,
     gene.assoc(dfm,gene,outcome,covs)
 
 stopImplicitCluster()
-
+cat("done \n writing the results")
 names(result) <- c("BETA","STD.ERROR","T-Stats","Pvalue")
 
 write.table(result,args[5], quote = FALSE, sep = "\t", row.names = FALSE)
