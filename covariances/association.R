@@ -57,7 +57,7 @@ if (nrow(dfm) < 1){
 
                                         #ANALYSIS
 
-cl <- makeCluster(4)
+cl <- makeCluster(16)
 registerDoParallel(cl)
 
 gene.assoc <- function(dfm,gene,outcome,cov){
@@ -69,13 +69,16 @@ gene.assoc <- function(dfm,gene,outcome,cov){
     return(c(res1,res2))
 }
 
-cat("running logistic regression in 4 cores")
+system.time()
+cat("running logistic regression in 16 cores")
 result <- foreach (gene = genes,
                    .combine = rbind,
                    .errorhandling = 'remove') %dopar%
     gene.assoc(dfm,gene,outcome,covs)
 
 stopImplicitCluster()
+system.time()
+
 cat("done \n writing the results")
 
 colnames(result) <- c("TRANSCRIPT","BETA","STD.ERROR","T-Stats","Pvalue")
