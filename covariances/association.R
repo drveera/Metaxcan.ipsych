@@ -17,7 +17,7 @@ library(doParallel)
 
 cat("reading fam file \n")
 fam <- read.table(args[2])
-fam <- fam[1:100,1:2]
+fam <- fam[,1:2]
 names(fam) <- c("FID","IID")
 
 print(head(fam))
@@ -32,7 +32,7 @@ covariance <- fread(args[4], header = TRUE)
 covs <- names(covariance)[3:ncol(covariance)]
 
 cat("reading expression file \n")
-expression <- fread(args[1], header = TRUE, colClasses = "numeric", nrows = 100)
+expression <- fread(args[1], header = TRUE, colClasses = "numeric")
 genes <- names(expression)
 
 cat("binding fam and expression \n")
@@ -78,7 +78,6 @@ result <- foreach (gene = genes,
 stopImplicitCluster()
 cat("done \n writing the results")
 
-
-colnames(result) <- c("transcript","BETA","STD.ERROR","T-Stats","Pvalue")
+colnames(result) <- c("TRANSCRIPT","BETA","STD.ERROR","T-Stats","Pvalue")
 
 write.table(result,args[5], quote = FALSE, sep = "\t", row.names = FALSE)
