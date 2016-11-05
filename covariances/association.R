@@ -13,6 +13,7 @@ args <- commandArgs(trailingOnly = TRUE)
 library(data.table)
 library(parallel)
 library(foreach)
+library(doParallel)
 
 cat("reading fam file \n")
 fam <- read.table(args[2])
