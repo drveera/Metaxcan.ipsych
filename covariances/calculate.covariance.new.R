@@ -16,7 +16,9 @@ cat("reading csv file \n")
 dbcsv <- read.csv(args[1], header = TRUE)
 
 cat("Reading dose file \n")
-dose <- fread(paste0("zcat ",args[2]))
+dose <- read.table(args[2])
+dose <- data.table(dose)
+
 
 
 
