@@ -20,9 +20,6 @@ names(fam) <- c("FID","IID")
 
 print(head(fam))
 
-cat("binding fam and expression \n")
-expression <- cbind(fam,expression)
-dim(expression)
 
 cat("reading phenotypes \n")
 pheno <- fread(args[3], header = TRUE)
@@ -35,6 +32,10 @@ covs <- names(covariance)[3:ncol(covariance)]
 cat("reading expression file \n")
 expression <- fread(args[1], header = TRUE, colClasses = "numeric")
 genes <- names(expression)
+
+cat("binding fam and expression \n")
+expression <- cbind(fam,expression)
+dim(expression)
 
 cat("merge1: pheno and covariance files \n")
 pheno.cov <- merge(pheno,covariance, by = c("FID","IID"))
