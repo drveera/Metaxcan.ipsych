@@ -40,8 +40,8 @@ dim(expression)
 cat("merge1: pheno and covariance files \n")
 pheno.cov <- merge(pheno,covariance, by = c("FID","IID"))
 
-pheno.cov$IID <- as.vector(pheno.cov$IID)
-pheno.cov$FID <- as.vector(pheno.cov$FID)
+expression$IID <- as.vector(expression$IID)
+expression$FID <- as.vector(expression$FID)
 
 cat("merge2 pheno.cov with expression \n")
 dfm <- merge(pheno.cov,expression, by = c("FID","IID"))
