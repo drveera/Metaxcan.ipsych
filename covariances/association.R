@@ -62,7 +62,7 @@ registerDoParallel(cl)
 
 gene.assoc <- function(dfm,gene,outcome,cov){
     fm <- as.formula(paste0(outcome,"~",gene,"+",paste(cov,collapse = "+")))
-    mod <- glm(fm,data= dfm)
+    mod <- glm(fm,data= dfm, family = "binomial")
     mod.sum <- summary(mod)$coefficients
     res1 <- row.names(mod.sum)[2]
     res2 <- mod.sum[2,]
