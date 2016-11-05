@@ -71,6 +71,7 @@ gene.assoc <- function(dfm,gene,outcome,cov){
     return(c(res1,res2))
 }
 
+cat("running logistic regression in 4 cores")
 result <- foreach (gene = genes,
                    .combine = rbind,
                    .errorhandling = 'remove') %dopar%
@@ -80,4 +81,4 @@ stopImplicitCluster()
 
 names(result) <- c("BETA","STD.ERROR","T-Stats","Pvalue")
 
-write.table(result,args[5], quote = FALSE, sep = "\t", rownames = FALSE)
+write.table(result,args[5], quote = FALSE, sep = "\t", row.names = FALSE)
