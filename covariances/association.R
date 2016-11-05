@@ -77,6 +77,8 @@ result <- foreach (gene = genes,
 
 stopImplicitCluster()
 cat("done \n writing the results")
-colnames(result) <- c("BETA","STD.ERROR","T-Stats","Pvalue")
+class(result)
+dim(result)
+                                        #names(result) <- c("BETA","STD.ERROR","T-Stats","Pvalue")
 
 write.table(result,args[5], quote = FALSE, sep = "\t", row.names = FALSE)
