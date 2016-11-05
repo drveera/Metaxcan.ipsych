@@ -44,7 +44,7 @@ expression$IID <- as.vector(expression$IID)
 expression$FID <- as.vector(expression$FID)
 
 print(str(pheno.cov))
-print(str(expression[,1:10,with=FALSE]))
+print(str(expression[,1:10]))
 
 cat("merge2 pheno.cov with expression \n")
 dfm <- merge(pheno.cov,expression, by = c("FID","IID"))
