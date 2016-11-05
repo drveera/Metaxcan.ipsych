@@ -39,6 +39,7 @@ dim(expression)
 
 cat("merge1: pheno and covariance files \n")
 pheno.cov <- merge(pheno,covariance, by = c("FID","IID"))
+pheno.cov$IID <- as.vector(pheno.cov$IID)
 
 expression$IID <- as.vector(expression$IID)
 expression$FID <- as.vector(expression$FID)
