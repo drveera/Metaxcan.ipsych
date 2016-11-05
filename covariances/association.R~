@@ -1,0 +1,28 @@
+#!/bin/sh
+
+args <- commandArgs(trailingOnly = TRUE)
+
+##args1 expression
+##args2 fam
+##args3 pheno
+##args4 cov
+
+##libraries
+
+library(data.table)
+library(parallel)
+
+cat("reading expression file \n")
+expression <- fread(args[1], header = TRUE, colClasses = "numeric")
+
+cat("reading fam file \n")
+fam <- fread(args[2], header = FALSE, sep = "\t")
+fam <- fam[,1:2,with=FALSE]
+names(fam) <- c("fid","iid")
+
+print(head(fam))
+
+cat("binding fam and expression \n")
+expression <- cbind(fam,expression)
+dim(expression)
+
