@@ -53,6 +53,6 @@ $(outname).snplist.c1:$(outname).snplist
 $(outname).snplist:$(db)
 	Rscript $(sd)/write.snplist.R $(db) $(outname).snplist
 
-#extract the weights
-#$(outname).weights.csv: $(db) 
-#	sh $(sd)/extract.weights.sh $(db) > $(outname).weights.csv
+
+
+
