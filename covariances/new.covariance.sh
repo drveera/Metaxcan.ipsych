@@ -23,7 +23,7 @@ outname=$(basename $db)
 #softwares
 source /com/extra/plink/1.90-beta-2016-03/load.sh
 
-echo "make $outname.snps.not.extracted -f $sd/Makefile  plinkfile=$plinkfile outname=$outname sd=$sd db=$db plink=$plink $4" > $outname.job1.adispatch
+echo "make $outname.snp95.bim -f $sd/Makefile  plinkfile=$plinkfile outname=$outname sd=$sd db=$db plink=$plink $4" > $outname.job1.adispatch
 
 for i in $(seq 22)
 do
