@@ -37,7 +37,7 @@ dose <- dose[,c(1,2,4,6,5,ncol(dose),7:(ncol(dose)-1))]
 
 
 cal.cov <- function(dfm){
-    dose.sub.matrix <- t(dfm[,8:ncol(dfm), with = FALSE])
+    dose.sub.matrix <- t(dfm[,8:ncol(dfm)])
     colnames(dose.sub.matrix) <- dfm$rsid
     dose.cov.matrix <- cov(dose.sub.matrix, use="pairwise.complete.obs")
     dose.cov.melted <- melt(dose.cov.matrix)
@@ -63,7 +63,7 @@ impute1NA <- function(maf,vec){
 
 
 cat("imputing the NAs \n")
-newdoseA <- dose[,1:6,with=FALSE]
+newdoseA <- dose[,1:6]
 
 cl <- makeCluster(16)
 registerDoParallel(cl)
