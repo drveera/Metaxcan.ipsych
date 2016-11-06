@@ -11,7 +11,7 @@ $(outname)
 
 # calculate allele frequencies
 $(outname).frq:$(outname).gen.traw 
-	/com/extra/plink/1.90-beta-2016-03/bin/plink --bfile $(outname_nochr).mismatch.removed \
+	/com/extra/plink/1.90-beta-2016-03/bin/plink --bfile $(outname_nochr).snp95 \
 --chr $(chr) \
 --freq --out $(outname)
 
