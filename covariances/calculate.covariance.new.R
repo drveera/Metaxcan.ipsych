@@ -1,27 +1,43 @@
 #!/bin/env Rscript
 
-                                        #args1 snp.file
-                                        #args2 dosage file
-                                        #args3 outname
+                                        #args1 plink traw file
+                                        #args2 plink frq  file
+                                        #args3 db csv file
+                                        #args4 outname
+
 
 args <- commandArgs(trailingOnly = TRUE)
 
                                         #libraries
 library(data.table)
 library(reshape2)
+library(doParallel)
+library(foreach)
+library(parallel)
 
 
 
 cat("reading csv file \n")
-dbcsv <- read.csv(args[1], header = TRUE)
+dbcsv <- read.csv(args[3], header = TRUE)
 
 cat("Reading dose file \n")
-dose <- fread(paste0("zcat ",args[2]))
+
+##args1 gene.traw file
+dose <- fread(args[1], header = TRUE)
+dose <- as.data.frame(dose)
+
+##args[2] freq file
+frq <- fread(args[2], header = TRUE)
+frq <- as.data.frame(frq)
+
+maf2 <- frq$MAF*2
+dose$maf <- frq$MAF
+dose <- dose[,c(1,2,4,6,5,ncol(dose),7:(ncol(dose)-1))]
 
 
 
 cal.cov <- function(dfm){
-    dose.sub.matrix <- t(dfm[,8:ncol(dfm)])
+    dose.sub.matrix <- t(dfm[,8:ncol(dfm), with = FALSE])
     colnames(dose.sub.matrix) <- dfm$rsid
     dose.cov.matrix <- cov(dose.sub.matrix, use="pairwise.complete.obs")
     dose.cov.melted <- melt(dose.cov.matrix)
@@ -30,31 +46,49 @@ cal.cov <- function(dfm){
     return(cbind(GENE,dose.cov.melted))
 }
 
+
 imputeNA <- function(vec){
     vec <- as.numeric(as.character(vec))
     vec <- replace(vec,is.na(vec),vec[1]*2)
     return(vec)
 }
 
+
+impute1NA <- function(maf,vec){
+    nacols <- is.na(vec)
+    vec[nacols] <- maf[nacols]
+    return(vec)
+}
+
+
+
 cat("imputing the NAs \n")
-newdoseA <- dose[,1:5,with=FALSE]
-print(head(newdoseA))
-print(nrow(newdoseA))
-newdoseB <- apply(dose,1,function(x) imputeNA(x[6:length(x)]))
-newdoseB <- as.data.frame(t(newdoseB))
-print(head(newdoseB[,1:10]))
-print(nrow(newdoseB))
+newdoseA <- dose[,1:6,with=FALSE]
+
+cl <- makeCluster(16)
+registerDoParallel(cl)
+
+newdoseB <- foreach(cnum = 7:ncol(dose),
+                    .combine = cbind,
+                    .errorhandling = 'remove') %dopar%
+    impute1NA(maf2,dose[,cnum])
+
+stopImplicitCluster()
+
 newdose <- as.data.frame(cbind(newdoseA,newdoseB))
 names(newdose)[2] <- "rsid"
+cat("done \n")
+
+
+
+cat("writing the new dosage file\n")
+write.table(newdose,paste0(args[4],".dosage"), row.names=F,col.names=F,quote=F)
 cat("done \n")
 
 cat("merging \n")
 dose.merge <- merge(dbcsv[,c("rsid","gene")], newdose, by = "rsid")
 
-newdosename=gsub(".gz","",args[2])
-cat("writing the new dosage file\n")
-write.table(newdose,paste0(newdosename,".new.dosage"), row.names=F,col.names=F,quote=F)
-cat("done \n")
+
 library(dplyr)
 
 cat("calculating cov \n")
@@ -65,5 +99,5 @@ doselst <- dose.merge %>%
 cat("done! \n")
 
 cat("writing the file")
-write.table(doselst,args[3],row.names = FALSE, col.names = FALSE, quote = FALSE)
+write.table(doselst,paste0(args[4],".covariance.matrix"),row.names = FALSE, col.names = FALSE, quote = FALSE)
 cat("completed!")
