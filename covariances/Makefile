@@ -5,6 +5,18 @@
 # create a table of number of snps queried and number of snps extracted
 # create a list of snps not extracted along with its transcript IDs
 
+#remove snps with <95% missing rate
+$(outname).snp95.bim:$(outname).sample95.bim
+	$(plink) --bfile $(outname).sample95 \
+--geno 0.05 \
+--make-bed --out $(outname).snp95
+
+# remove individuals with <95% missing rate
+$(outname).sample95.bim: $(outname).mismatch.removed.bim
+	$(plink) --bfile $(outname).mismatch.removed \
+--mind 0.05 \
+--make-bed --out $(outname).sample95
+
 $(outname).snps.not.extracted:$(outname).weights.csv $(outname).mismatch.removed.bim
 	Rscript $(sd)/write.snp.report.R $(outname).weights.csv $(outname).mismatch.removed.bim $(outname).snps.not.extracted
 
