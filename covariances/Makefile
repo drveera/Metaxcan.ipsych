@@ -38,9 +38,9 @@ $(outname).bim:$(plinkfile).bim $(outname).snplist.c1 $(outname).snplist
 #write snplist and snplist_c1
 $(outname).snplist.c1:$(outname).snplist
 	cut -f 1 $(outname).snplist > $(outname).snplist.c1
-$(outname).snplist:$(outname).weights.csv
-	Rscript $(sd)/write.snplist.R $(outname).weights.csv $(outname).snplist
+$(outname).snplist:$(db)
+	Rscript $(sd)/write.snplist.R $(db) $(outname).snplist
 
 #extract the weights
-$(outname).weights.csv: $(db) 
-	sh $(sd)/extract.weights.sh $(db) > $(outname).weights.csv
+#$(outname).weights.csv: $(db) 
+#	sh $(sd)/extract.weights.sh $(db) > $(outname).weights.csv

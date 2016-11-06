@@ -2,7 +2,7 @@
 
 if [ ! $2 ];
 then
-    echo "usage ./script plinkfile snplist.file"
+    echo "usage ./script plinkfile db.csv working_directory "
     exit 1
 fi
 
@@ -22,7 +22,7 @@ outname=$(basename $db)
 #softwares
 source /com/extra/plink/1.90-beta-2016-03/load.sh
 
-#make $outname.covariance.matrix.gz -f $sd/Makefile  plinkfile=$plinkfile outname=$outname sd=$sd db=$db $3
+echo"make $outname.covariance.matrix.gz -f $sd/Makefile  plinkfile=$plinkfile outname=$outname sd=$sd db=$db $3" > $outname.job1.adispatch
 
 for i in $(seq 22)
 do
@@ -33,7 +33,7 @@ outname_nochr=$wd/$outname \
 sd=$sd \
 db=$db \
 chr=$i "
-done 
+done > $outname.job2.adispatch
 
 
 
