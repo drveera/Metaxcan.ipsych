@@ -11,6 +11,7 @@ fi
 plinkfile=$1
 db=$2
 wd=$3
+plink=/com/extra/plink/1.90-beta-2016-03/bin/plink
 
 #directories
 #script directory
@@ -32,7 +33,8 @@ outname=$wd/$outname.chr$i \
 outname_nochr=$wd/$outname \
 sd=$sd \
 db=$db \
-chr=$i "
+chr=$i \
+plink=$plink"
 done > $outname.job2.adispatch
 
 

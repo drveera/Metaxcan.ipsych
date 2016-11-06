@@ -15,7 +15,7 @@ $(outname).rsids.mismatch.verify: $(outname).mismatch.removed.bim $(outname).snp
 
 #remove the allele mismatched snps from the plink file
 $(outname).mismatch.removed.bim:$(outname).rsids.mismatch  $(outname).bim
-	plink --bfile $(outname) \
+	$(plink) --bfile $(outname) \
 --exclude $(outname).rsids.mismatch \
 --reference-allele $(outname).snplist \
 --make-bed \
@@ -28,7 +28,7 @@ $(outname).rsids.mismatch:$(outname).bim $(outname).snplist
 
 #extract the snps forcing the reference-allele to 
 $(outname).bim:$(plinkfile).bim $(outname).snplist.c1 $(outname).snplist
-	plink --bfile $(plinkfile) \
+	$(plink) --bfile $(plinkfile) \
 --extract $(outname).snplist.c1 \
 --reference-allele $(outname).snplist \
 --make-bed \
