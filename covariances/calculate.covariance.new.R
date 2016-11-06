@@ -18,8 +18,8 @@ library(parallel)
 
 
 cat("reading csv file \n")
-dbcsv <- read.csv(args[3], header = TRUE)
-
+dbcsv <- fread(args[3], header = TRUE, sep = ",")
+dbcsv <- as.data.frame(dbcsv)
 cat("Reading dose file \n")
 
 ##args1 gene.traw file
