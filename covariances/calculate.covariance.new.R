@@ -82,7 +82,7 @@ cat("done \n")
 
 
 cat("writing the new dosage file\n")
-write.table(newdose,paste0(args[4],".dosage"), row.names=F,col.names=F,quote=F)
+fwrite(newdose,paste0(args[4],".dosage"), row.names=F,col.names=F,quote=F, sep = "\t")
 cat("done \n")
 
 cat("merging \n")
@@ -99,5 +99,5 @@ doselst <- dose.merge %>%
 cat("done! \n")
 
 cat("writing the file")
-write.table(doselst,paste0(args[4],".covariance.matrix"),row.names = FALSE, col.names = FALSE, quote = FALSE)
+fwrite(doselst,paste0(args[4],".covariance.matrix"),row.names = FALSE, col.names = FALSE, quote = FALSE, sep = "\t")
 cat("completed!")
