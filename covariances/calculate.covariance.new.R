@@ -32,7 +32,7 @@ cal.cov <- function(dfm){
 
 imputeNA <- function(vec){
     vec <- as.numeric(as.character(vec))
-    vec <- replace(vec,is.na(vec),vec[1])
+    vec <- replace(vec,is.na(vec),vec[1]*2)
     return(vec)
 }
 
