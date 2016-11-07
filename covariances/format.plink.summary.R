@@ -22,7 +22,7 @@ names(assoc)[2] <- "rsid"
 bim <- fread(args[2])
 names(bim) <- c("chr","rsid","cm","bp","a1","a2")
 
-dfm <- merge(assoc,db,by = "rsid")
+dfm <- merge(assoc,bim,by = "rsid")
 
 dfm <- dfm[,c("chr","rsid","bp","a1","a2")]
 
