@@ -1,5 +1,10 @@
 #!/bin/env Rscript
 
+
+##args1 summary file
+##args2 db csv file
+##args3 outname
+
 args <- commandArgs(trailingOnly = TRUE)
 
 
