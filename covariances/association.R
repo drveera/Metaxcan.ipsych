@@ -106,4 +106,4 @@ head(result)
 
 colnames(result) <- c("TRANSCRIPT","BETA","STD.ERROR","T-Stats","Pvalue")
 
-fwrite(result,args[5], quote = FALSE, sep = "\t", row.names = FALSE)
+fwrite(as.data.frame(result),args[5], quote = FALSE, sep = "\t", row.names = FALSE)
