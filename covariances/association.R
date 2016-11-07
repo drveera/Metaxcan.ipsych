@@ -50,10 +50,16 @@ expression$FID <- as.vector(expression$FID)
 cat("merge2 pheno.cov with expression \n")
 dfm <- merge(pheno.cov,expression, by = c("FID","IID"))
 
-if (nrow(dfm) < 1){
+if (nrow(dfm) < 1)
+   {
     cat("no samples left to analyse in merged file quitting ")
     q()
-}
+   }
+
+   dim(dfm)
+   prin(table(dfm$outcome))
+   
+   
 
                                         #ANALYSIS
 
