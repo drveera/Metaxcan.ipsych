@@ -1,0 +1,20 @@
+#!/bin/env Rscript
+
+args <- commandArgs(trailingOnly = TRUE)
+
+
+##libraries
+library(data.table)
+
+##read the summary file
+
+assoc <- fread(args[1], header = TRUE)
+
+assoc <- assoc[assoc$TEST == "ADD",]
+
+## read the bim file to get allele information
+
+bim <- fread(args[2])
+
+
+
