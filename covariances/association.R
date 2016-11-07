@@ -86,7 +86,7 @@ cat("running logistic regression in 16 cores")
 result <- foreach (gene = genes,
                    .combine = rbind,
                    .errorhandling = 'remove') %dopar%
-    gene.assoc(dfm,gene,outcome,covs)
+    gene.assoc(dfm,gene,"outcome",covs)
 
 stopImplicitCluster()
 
