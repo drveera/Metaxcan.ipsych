@@ -25,7 +25,7 @@ print(head(fam))
 
 cat("reading phenotypes \n")
 pheno <- fread(args[3], header = TRUE)
-outcome <- names(pheno)[ncol(pheno)]
+names(pheno)[ncol(pheno)] = "outcome"
 
 cat("reading covariance file \n")
 covariance <- fread(args[4], header = TRUE)
@@ -42,6 +42,10 @@ dim(expression)
 cat("merge1: pheno and covariance files \n")
 pheno.cov <- merge(pheno,covariance, by = c("FID","IID"))
 pheno.cov$IID <- as.character(pheno.cov$IID)
+
+print(head(pheno.cov))
+
+prin(head(pheno.cov))
 
 expression$IID <- as.character(expression$IID)
 expression$FID <- as.vector(expression$FID)
