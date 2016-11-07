@@ -45,7 +45,7 @@ pheno.cov$IID <- as.character(pheno.cov$IID)
 
 print(head(pheno.cov))
 
-prin(head(pheno.cov))
+
 
 expression$IID <- as.character(expression$IID)
 expression$FID <- as.vector(expression$FID)
