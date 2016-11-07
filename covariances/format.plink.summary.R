@@ -24,10 +24,11 @@ db <- fread(args[2], sep = ",", header = TRUE)
 
 
 dfm <- merge(assoc,db,by = "rsid")
+print(table(dfm$A1 == dfm$eff_allele))
 
 dfm <- dfm[,c("CHR","rsid","A1","ref_allele","OR","P")]
 
-print(table(dfm$A1 == dfm$effect_allele))
+
 
 dfm.split <- split(dfm,dfm$CHR)
 
