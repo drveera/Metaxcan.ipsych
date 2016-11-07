@@ -71,8 +71,8 @@ if (nrow(dfm) < 1)
 cl <- makeCluster(16)
 registerDoParallel(cl)
 
-gene.assoc <- function(dfm,gene,outcome,cov){
-    fm <- as.formula(paste0(outcome,"~",gene,"+",paste(cov,collapse = "+")))
+gene.assoc <- function(dfm,gene,cov){
+    fm <- as.formula(paste0("outcome~",gene,"+",paste(cov,collapse = "+")))
     mod <- glm(fm,data= dfm, family = "binomial")
     mod.sum <- summary(mod)$coefficients
     res1 <- row.names(mod.sum)[2]
@@ -86,7 +86,7 @@ cat("running logistic regression in 16 cores")
 result <- foreach (gene = genes,
                    .combine = rbind,
                    .errorhandling = 'remove') %dopar%
-    gene.assoc(dfm,gene,"outcome",covs)
+    gene.assoc(dfm,gene = gene,cov = covs)
 
 stopImplicitCluster()
 
