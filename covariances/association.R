@@ -93,6 +93,10 @@ print(proc.time()-ptm)
 
 cat("done \n writing the results")
 
+dim(result)
+class(result)
+head(result)
+
 colnames(result) <- c("TRANSCRIPT","BETA","STD.ERROR","T-Stats","Pvalue")
 
 write.table(result,args[5], quote = FALSE, sep = "\t", row.names = FALSE)
