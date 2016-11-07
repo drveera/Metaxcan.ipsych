@@ -32,7 +32,7 @@ print(table(dfm$A1 == dfm$effect_allele))
 dfm.split <- split(dfm,dfm$CHR)
 
 for (i in 1:length(dfm.split)){
-    fwrite(dfm.split[[i]],paste0(args[3],".chr",i,"sum"), sep = "\t", row.names = FALSE, quote = FALSE)
+    fwrite(dfm.split[[i]],paste0(args[3],".chr",i,".sum"), sep = "\t", row.names = FALSE, quote = FALSE)
 }
 
 
