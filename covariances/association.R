@@ -20,7 +20,7 @@ fam <- read.table(args[2])
 fam <- fam[,1:2]
 names(fam) <- c("FID","IID")
 
-print(head(fam))
+
 
 
 cat("reading phenotypes \n")
@@ -44,7 +44,7 @@ cat("merge1: pheno and covariance files \n")
 pheno.cov <- merge(pheno,covariance, by = c("FID","IID"))
 pheno.cov$IID <- as.character(pheno.cov$IID)
 
-print(head(pheno.cov))
+
 
 
 
@@ -60,16 +60,20 @@ if (nrow(dfm) < 1)
     cat("no samples left to analyse in merged file quitting ")
     q()
    }
-
+   cat("dimensions of merged data frame \n")
    dim(dfm)
+
+   cat("case control counts \n")
    print(table(dfm$outcome))
    
    
 
                                         #ANALYSIS
 
-cl <- makeCluster(16)
-registerDoParallel(cl)
+   cl <- makeCluster(16)
+   cat("registering 16 cores for parallel processing \n")
+   registerDoParallel(cl)
+   cat("done! \n")
 
 gene.assoc <- function(dfm,gene,cov){
     fm <- as.formula(paste0("outcome~",gene,"+",paste(cov,collapse = "+")))
@@ -80,19 +84,19 @@ gene.assoc <- function(dfm,gene,cov){
     return(c(res1,res2))
 }
 
-ptm <- proc.time()
+
 
 cat("running logistic regression in 16 cores")
-print(genes[1:10])
 
-result <- foreach (gene = genes[1:100],
+
+result <- foreach (gene = genes,
                    .combine = rbind,
                    .errorhandling = 'remove') %dopar%
     gene.assoc(dfm,gene = gene,cov = covs)
 
 stopImplicitCluster()
 
-print(proc.time()-ptm)
+
 
 cat("done \n writing the results")
 
@@ -102,4 +106,4 @@ head(result)
 
 colnames(result) <- c("TRANSCRIPT","BETA","STD.ERROR","T-Stats","Pvalue")
 
-write.table(result,args[5], quote = FALSE, sep = "\t", row.names = FALSE)
+fwrite(result,args[5], quote = FALSE, sep = "\t", row.names = FALSE)
