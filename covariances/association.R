@@ -83,7 +83,7 @@ gene.assoc <- function(dfm,gene,cov){
 ptm <- proc.time()
 
 cat("running logistic regression in 16 cores")
-result <- foreach (gene = genes,
+result <- foreach (gene = genes[1:100],
                    .combine = rbind,
                    .errorhandling = 'remove') %dopar%
     gene.assoc(dfm,gene = gene,cov = covs)
