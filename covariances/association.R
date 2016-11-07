@@ -33,6 +33,7 @@ covs <- names(covariance)[3:ncol(covariance)]
 
 cat("reading expression file \n")
 expression <- fread(args[1], header = TRUE, colClasses = "numeric")
+expression[1:10,1:10]
 genes <- names(expression)
 
 cat("binding fam and expression \n")
