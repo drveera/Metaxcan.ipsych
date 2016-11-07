@@ -2,7 +2,7 @@
 
 
 ##args1 summary file
-##args2 db csv file
+##args2 bim file 
 ##args3 outname
 
 args <- commandArgs(trailingOnly = TRUE)
@@ -19,28 +19,11 @@ assoc <- assoc[assoc$TEST == "ADD",]
 names(assoc)[2] <- "rsid"
 
 ## read the bim file to get allele information
-
-db <- fread(args[2], sep = ",", header = TRUE)
-
+bim <- fread(args[2])
+names(bim) <- c("chr","rsid","cm","bp","a1","a2")
 
 dfm <- merge(assoc,db,by = "rsid")
-print(table(dfm$A1 == dfm$eff_allele))
 
-dfm <- dfm[,c("CHR","rsid","A1","ref_allele","OR","P")]
+dfm <- dfm[,c("chr","rsid","bp","a1","a2")]
 
-
-
-dfm.split <- split(dfm,dfm$CHR)
-
-for (i in 1:length(dfm.split)){
-    fwrite(dfm.split[[i]],paste0(args[3],".chr",i,".sum"), sep = "\t", row.names = FALSE, quote = FALSE)
-}
-
-
-
-
-
-
-
-
-
+fwrite(dfm,args[3], sep = "\t", row.names = F, quote = FALSE)
