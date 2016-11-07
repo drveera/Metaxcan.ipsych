@@ -57,7 +57,7 @@ if (nrow(dfm) < 1)
    }
 
    dim(dfm)
-   prin(table(dfm$outcome))
+   print(table(dfm$outcome))
    
    
 
