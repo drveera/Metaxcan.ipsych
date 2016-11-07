@@ -25,7 +25,7 @@ db <- fread(args[2], sep = ",", header = TRUE)
 
 dfm <- merge(assoc,db,by = "rsid")
 
-dfm <- dfm[,c("CHR","rsid","A1","ref_allel","OR","P")]
+dfm <- dfm[,c("CHR","rsid","A1","ref_allele","OR","P")]
 
 print(table(dfm$A1 == dfm$effect_allele))
 
