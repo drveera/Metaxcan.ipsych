@@ -24,6 +24,6 @@ names(bim) <- c("chr","rsid","cm","bp","a1","a2")
 
 dfm <- merge(assoc,bim,by = "rsid")
 
-dfm <- dfm[,c("chr","rsid","bp","a1","a2")]
+dfm <- dfm[,c("chr","rsid","bp","a1","a2","OR","P")]
 
 fwrite(dfm,args[3], sep = "\t", row.names = F, quote = FALSE)
