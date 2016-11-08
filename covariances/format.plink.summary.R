@@ -23,7 +23,9 @@ bim <- fread(args[2])
 names(bim) <- c("chr","rsid","cm","bp","a1","a2")
 
 dfm <- merge(assoc,bim,by = "rsid")
+dfm <- dfm[complete.cases(dfm),]
+dfm$BETA <- log(dfm$OR)
 
-dfm <- dfm[,c("chr","rsid","bp","a1","a2","OR","P")]
+dfm <- dfm[,c("chr","rsid","bp","a1","a2","OR","BETA","P")]
 
 fwrite(dfm,args[3], sep = "\t", row.names = F, quote = FALSE)
